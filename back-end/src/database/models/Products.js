@@ -24,7 +24,10 @@ const ProductModel = (sequelize, DataTypes) => {
   );
 
   Product.associate = (models) => {
-    Product.belongsToMany(models.Sale, { through: 'SalesProducts' });
+    Product.belongsToMany(models.Sale, {
+      through: 'SalesProducts',
+      as: 'sales',
+    });
   };
 
   return Product;
