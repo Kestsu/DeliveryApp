@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginComponent from '../components/LoginComponent';
-import MessageErrorFooter from '../components/MessageErrorFooter';
+import LoginForm from '../components/LoginForm';
+import LoginErrorHandler from '../components/LoginErrorHandler';
 
 function Login() {
   return (
     <div>
-      <LoginComponent />
-      <MessageErrorFooter />
+      <LoginForm />
+      <LoginErrorHandler />
     </div>
   );
 }

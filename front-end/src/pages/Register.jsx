@@ -1,12 +1,13 @@
 import React from 'react';
-import RegisterComponent from '../components/RegisterComponent';
-import MessageErrorFooter from '../components/MessageErrorFooter';
+import LoginErrorHandler from '../components/LoginErrorHandler';
+import RegisterForm from '../components/RegisterForm';
 
 function Register() {
   return (
     <div>
-      <RegisterComponent />
-      <MessageErrorFooter />
+      <RegisterForm />
+      <LoginErrorHandler />
+
     </div>
   );
 }

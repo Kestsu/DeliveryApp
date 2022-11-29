@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function RegisterComponent() {
+function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -90,4 +90,4 @@ function RegisterComponent() {
   );
 }
 
-export default RegisterComponent;
+export default RegisterForm;

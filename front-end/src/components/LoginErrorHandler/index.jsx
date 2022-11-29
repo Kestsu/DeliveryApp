@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MessageErrorFooter() {
+function LoginErrorHandler() {
   return (
     <div>
       <p
@@ -14,4 +14,4 @@ function MessageErrorFooter() {
   );
 }
 
-export default MessageErrorFooter;
+export default LoginErrorHandler;
