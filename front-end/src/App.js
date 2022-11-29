@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import './App.css';
 import Product from './pages/Product';
 import Products from './pages/Products';
@@ -10,6 +10,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
         <Route exact path="/login" component={ Login } />
         <Route exact path="/register" component={ Register } />
 

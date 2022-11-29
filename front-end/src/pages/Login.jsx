@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginComponent from '../components/LoginComponet';
+import LoginComponent from '../components/LoginComponent';
 import MessageErrorFooter from '../components/MessageErrorFooter';
 
 function Login() {
