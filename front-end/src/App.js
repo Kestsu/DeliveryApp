@@ -1,15 +1,14 @@
 import React from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/customer/products" />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
