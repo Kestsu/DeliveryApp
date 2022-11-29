@@ -6,7 +6,6 @@ function Products() {
     <div>
       <Header />
       Products
-
     </div>
   );
 }
