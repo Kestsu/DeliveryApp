@@ -50,8 +50,8 @@ const useAuth = () => {
         try {
           // verificar se o token é válido
           // await api.get('/customer/products');
-          await api.get('/products');
           api.defaults.headers.Authorization = `Bearer ${token}`;
+          await api.get('/products');
           setUser({ name, role, email });
           setIsAuth(true);
           setLoading(false);
@@ -75,7 +75,6 @@ const useAuth = () => {
 
     try {
       const { data } = await api.post('/login', userData);
-      console.log('data', data);
 
       Object.keys(data).forEach((key) => {
         localStorage.setItem(key, JSON.stringify(data[key]));
