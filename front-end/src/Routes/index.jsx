@@ -4,7 +4,7 @@ import { AuthContext } from '../context/Auth/AuthContext';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Products from '../pages/Products';
-import Product from '../pages/Product';
+import Order from '../pages/Order';
 
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
@@ -32,12 +32,11 @@ function Routes() {
         <Route exact path="/register" component={ Register } />
 
         <Route exact path="/customer/products" component={ Products } />
-        <Route exact path="/customer/products/:id" component={ Product } />
         <Route exact path="/customer/products/:idVenda" />
         <Route exact path="/customer/checkout" />
 
         <Route exact path="/seller/order" />
-        <Route exact path="/seller/order/id" />
+        <Route exact path="/seller/order/:id" component={ Order } />
 
         <Route exact path="/admin/manage" />
         {/* <Redirect to="/customer/products" /> */}

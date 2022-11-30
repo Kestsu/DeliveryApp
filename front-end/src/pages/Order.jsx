@@ -3,19 +3,19 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 
-function Product() {
+function Order() {
   const params = useParams();
   const { id } = params;
 
   return (
     <div>
       <Header />
-      {`Product ${id}`}
+      {`Order ${id}`}
     </div>
   );
 }
 
-export default Product;
+export default Order;
 
 // Product.propTypes = {
 //   id: PropTypes.string.isRequired,
