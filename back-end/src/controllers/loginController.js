@@ -5,7 +5,7 @@ const loginPost = async (req, res, next) => {
     const result = await getUser(req.body);
     return res.status(200).json(result);
   } catch (error) {
-     next(error)
+     next(error);
   }
 };
 module.exports = { loginPost };
