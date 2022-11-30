@@ -11,10 +11,10 @@ function Header() {
       <nav>
         <ul>
           {
-            user.role !== 'administrator' && (
+            user?.role !== 'administrator' && (
               <li>
                 <Link
-                  to={ user.role === 'customer'
+                  to={ user?.role === 'customer'
                     ? '/customer/products' : '/seller/orders' }
                   data-testid="customer_products__element-navbar-link-products"
                 >
@@ -25,7 +25,7 @@ function Header() {
             )
           }
           {
-            user.role === 'customer' && (
+            user?.role === 'customer' && (
               <li>
                 <Link
                   to="/customer/orders"
@@ -37,7 +37,7 @@ function Header() {
             )
           }
           {
-            user.role === 'administrator' && (
+            user?.role === 'administrator' && (
               <li>
                 <Link
                   to="/admin/manage"
