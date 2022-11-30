@@ -1,12 +1,11 @@
 const { getUser } = require('../services/loginService');
 
-const loginPost = async (req, res) => {
+const loginPost = async (req, res, next) => {
   try {
     const result = await getUser(req.body);
     return res.status(200).json(result);
   } catch (error) {
-    const err = error;
-    return res.status(err.status).json({ message: err.message });
+     next(error)
   }
 };
 module.exports = { loginPost };
