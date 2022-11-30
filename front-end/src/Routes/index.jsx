@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/Auth/AuthContext';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -8,6 +8,8 @@ import Order from '../pages/Order';
 
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
+  const { pathname } = useLocation();
+  console.log('pathname', pathname);
 
   if (!loading) {
     return (
@@ -19,7 +21,7 @@ function Routes() {
         <Route exact path="/register" component={ Register } />
 
         {
-          isAuth ? (
+          isAuth && (
             <>
               <Route exact path="/customer/products" component={ Products } />
               <Route exact path="/customer/products/:idVenda" />
@@ -30,9 +32,11 @@ function Routes() {
 
               <Route exact path="/admin/manage" />
             </>
-          ) : (
-            <Redirect to="/login" />
           )
+        }
+
+        {
+          !isAuth && pathname !== '/register' && <Redirect to="/login" />
         }
         {/* <Redirect to="/customer/products" /> */}
       </>
