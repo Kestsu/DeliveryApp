@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/Auth/AuthContext';
 
 function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const history = useHistory();
+  const { handleRegister } = useContext(AuthContext);
+  // const history = useHistory();
 
   useEffect(() => {
     const handleDisabled = () => {
@@ -25,9 +26,9 @@ function RegisterForm() {
     handleDisabled();
   }, [email, password, name]);
 
-  const handleSign = () => {
-    history.push('/customer/products');
-  };
+  // const handleSign = () => {
+  //   history.push('/customer/products');
+  // };
   return (
     <div>
       <div>
@@ -80,7 +81,7 @@ function RegisterForm() {
           data-testid="common_register__button-register"
           type="button"
           disabled={ disabled }
-          onClick={ handleSign }
+          onClick={ () => handleRegister({ userData: { name, email, password } }) }
         >
           CADASTRAR
         </button>
