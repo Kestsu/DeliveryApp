@@ -9,8 +9,8 @@ import { AuthProvider } from './context/Auth/AuthContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <Switch>
           <Route exact path="/">
             <Redirect to="/login" />
@@ -28,8 +28,8 @@ function App() {
 
           <Route exact path="/admin/manage" />
         </Switch>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

@@ -26,18 +26,21 @@ const useAuth = () => {
   api.interceptors.response.use(
     (response) => response,
     async (error) => {
-      const originalRequest = error.config;
-      if (error?.response?.status === forbiddenStatus && !originalRequest.retry) {
-        originalRequest.retry = true;
+      // descomentar quando aplicar refresh token
+      // const originalRequest = error.config;
+      // if (error?.response?.status === forbiddenStatus && !originalRequest.retry) {
+      //   originalRequest.retry = true;
 
-        const { data } = await api.post('/auth/refresh_token');
-        if (data) {
-          localStorage.setItem('token', JSON.stringify(data.token));
-          api.defaults.headers.Authorization = `Bearer ${data.token}`;
-        }
-        return api(originalRequest);
-      }
-      if (error?.response?.status === unauthorizedStatus) {
+      //   const { data } = await api.post('/auth/refresh_token');
+      //   if (data) {
+      //     localStorage.setItem('token', JSON.stringify(data.token));
+      //     api.defaults.headers.Authorization = `Bearer ${data.token}`;
+      //   }
+      //   return api(originalRequest);
+      // }
+
+      if (error?.response?.status === unauthorizedStatus
+        || error?.response?.status === forbiddenStatus) {
         localStorage.removeItem('token');
         api.defaults.headers.Authorization = undefined;
         setIsAuth(false);
@@ -48,12 +51,13 @@ const useAuth = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const name = localStorage.getItem('name');
     (async () => {
       if (token) {
         try {
-          const { data } = await api.post('/auth/refresh_token');
-          api.defaults.headers.Authorization = `Bearer ${data.token}`;
-          setUser(data.user);
+          // const { data } = await api.post('/auth/refresh_token');
+          api.defaults.headers.Authorization = `Bearer ${token}`;
+          setUser(name);
           setIsAuth(true);
         } catch (err) {
           console.log(err);
@@ -71,13 +75,22 @@ const useAuth = () => {
 
       // data de teste
       console.log(userData);
-      const data = { user: { role: 'administrator' }, token: '123' };
+      const data = {
+        name: 'Tereza',
+        email: 'tereza@gmail.com.br',
+        role: 'administrator',
+        token: '123',
+      };
 
-      localStorage.setItem('token', JSON.stringify(data.token));
+      Object.keys(data).forEach((key) => {
+        localStorage.setItem(key, JSON.stringify(data[key]));
+      });
+
       api.defaults.headers.Authorization = `Bearer ${data.token}`;
       setUser(data.user);
       setIsAuth(true);
-      history.push('/products');
+      console.log('testando history');
+      history.push('/customer/products');
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -88,8 +101,11 @@ const useAuth = () => {
   const handleLogout = async () => {
     setLoading(true);
 
+    console.log('testando logout');
+
     try {
-      await api.delete('/auth/logout');
+      // descomentar quando tiver o endpoint
+      // await api.delete('/auth/logout');
       setIsAuth(false);
       setUser({});
       localStorage.removeItem('token');

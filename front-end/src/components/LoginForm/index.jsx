@@ -74,6 +74,7 @@ function LoginForm() {
           type="button"
           disabled={ disabled }
           onClick={ () => handleLogin({ userData: { email, password } }) }
+          // onClick={ () => history.push('/customer/products') }
         >
           LOGIN
         </button>
