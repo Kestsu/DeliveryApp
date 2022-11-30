@@ -49,7 +49,8 @@ const useAuth = () => {
       if (token && name && role && email) {
         try {
           // verificar se o token é válido
-          // const { data } = await api.get('/customer/products');
+          // await api.get('/customer/products');
+          await api.get('/products');
           api.defaults.headers.Authorization = `Bearer ${token}`;
           setUser({ name, role, email });
           setIsAuth(true);
@@ -60,7 +61,7 @@ const useAuth = () => {
           setIsAuth(false);
           api.defaults.headers.Authorization = undefined;
           localStorage.clear();
-          console.log('Tempo de requisição excedido (1000ms)');
+          console.log(err);
         }
       }
 
@@ -73,21 +74,10 @@ const useAuth = () => {
     setLoading(true);
 
     try {
-      // descomentar quando a rota auth estiver pronta
-      // const { data } = await api.post('/auth/login', userData);
-      console.log(userData);
-
-      // data de teste
-      // comentar quando a rota auth estiver pronta
-      const data = {
-        name: 'Tereza',
-        email: 'tereza@gmail.com.br',
-        role: 'administrator',
-        token: '123',
-      };
+      const { data } = await api.post('/login', userData);
 
       Object.keys(data).forEach((key) => {
-        localStorage.setItem(key, data[key]);
+        localStorage.setItem(key, JSON.stringify(data[key]));
       });
 
       api.defaults.headers.Authorization = `Bearer ${data.token}`;
