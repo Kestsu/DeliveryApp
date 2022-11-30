@@ -4,6 +4,7 @@ import { AuthContext } from '../context/Auth/AuthContext';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Products from '../pages/Products';
+import CustomerCheckout from '../pages/CustomerCheckout';
 import Order from '../pages/Order';
 
 function Routes() {
@@ -25,7 +26,8 @@ function Routes() {
             <>
               <Route exact path="/customer/products" component={ Products } />
               <Route exact path="/customer/products/:idVenda" />
-              <Route exact path="/customer/checkout" />
+              <Route exact path="/customer/checkout" component={ CustomerCheckout } />
+              <Route exact path="/customer/orders" />
 
               <Route exact path="/seller/order" />
               <Route exact path="/seller/order/:id" component={ Order } />

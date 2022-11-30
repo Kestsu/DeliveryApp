@@ -109,7 +109,28 @@ const useAuth = () => {
     }
   };
 
-  return { isAuth, loading, user, handleLogin, handleLogout };
+  const handleRegister = async ({ userData }) => {
+    setLoading(true);
+
+    try {
+      const { data } = await api.post('/register', userData);
+
+      Object.keys(data).forEach((key) => {
+        localStorage.setItem(key, JSON.stringify(data[key]));
+      });
+
+      api.defaults.headers.Authorization = `Bearer ${data.token}`;
+      setUser(data.user);
+      setIsAuth(true);
+      history.push('/customer/products');
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
+
+  return { isAuth, loading, user, handleLogin, handleLogout, handleRegister };
 };
 
 export default useAuth;

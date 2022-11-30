@@ -5,11 +5,11 @@ import useAuth from '../../hooks/useAuth';
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const { isAuth, loading, user, handleLogin, handleLogout } = useAuth();
+  const { isAuth, loading, user, handleLogin, handleLogout, handleRegister } = useAuth();
 
   const memoizedValues = useMemo(
-    () => ({ isAuth, loading, user, handleLogin, handleLogout }),
-    [isAuth, loading, user, handleLogin, handleLogout],
+    () => ({ isAuth, loading, user, handleLogin, handleLogout, handleRegister }),
+    [isAuth, loading, user, handleLogin, handleLogout, handleRegister],
   );
 
   return (
