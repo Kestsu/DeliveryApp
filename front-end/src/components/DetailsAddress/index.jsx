@@ -11,7 +11,8 @@ function DetailsAddress() {
   useEffect(() => {
     (async () => {
       const { data } = await api.get('/users');
-      setUsers(data);
+      const response = data.map((item) => item.role === 'customer');
+      setUsers(response);
     })();
   }, []);
 
