@@ -50,10 +50,12 @@ const useAuth = () => {
   );
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem('token');
     const name = localStorage.getItem('name');
     const role = localStorage.getItem('role');
     const email = localStorage.getItem('email');
+
     (async () => {
       if (token) {
         try {
@@ -65,6 +67,7 @@ const useAuth = () => {
           console.log(err);
         }
       }
+      console.log('loading context', loading);
       setLoading(false);
     })();
   }, []);
@@ -85,7 +88,7 @@ const useAuth = () => {
       };
 
       Object.keys(data).forEach((key) => {
-        localStorage.setItem(key, JSON.stringify(data[key]));
+        localStorage.setItem(key, data[key]);
       });
 
       api.defaults.headers.Authorization = `Bearer ${data.token}`;

@@ -8,16 +8,23 @@ import Product from '../pages/Product';
 
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
-  if (!isAuth) {
+  console.log('isAuth', isAuth);
+  console.log('loading', loading);
+
+  if (!isAuth && !loading) {
     return (
       <>
-        {loading && <p>loading...</p>}
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/register" component={ Register } />
         <Redirect to="/login" />
       </>
     );
   }
 
-  if (isAuth) {
+  if (isAuth && !loading) {
     return (
       <>
         <Route exact path="/">
@@ -38,6 +45,12 @@ function Routes() {
       </>
     );
   }
+
+  return (
+    <p>
+      {loading && <p>loading...</p>}
+    </p>
+  );
 }
 
 export default Routes;
