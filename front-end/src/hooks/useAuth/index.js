@@ -63,7 +63,7 @@ const useAuth = () => {
     })();
   }, []);
 
-  const handleLogin = async (userData) => {
+  const handleLogin = async ({ userData }) => {
     setLoading(true);
 
     try {
