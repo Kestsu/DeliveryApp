@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 
 function Order() {
   const params = useParams();

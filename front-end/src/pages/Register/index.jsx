@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginErrorHandler from '../components/LoginErrorHandler';
-import RegisterForm from '../components/RegisterForm';
+import LoginErrorHandler from '../../components/LoginErrorHandler';
+import RegisterForm from '../../components/RegisterForm';
 
 function Register() {
   return (

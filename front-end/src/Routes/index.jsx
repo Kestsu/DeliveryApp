@@ -9,20 +9,7 @@ import Order from '../pages/Order';
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
 
-  if (!isAuth && !loading) {
-    return (
-      <>
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/register" component={ Register } />
-        <Redirect to="/login" />
-      </>
-    );
-  }
-
-  if (isAuth && !loading) {
+  if (!loading) {
     return (
       <>
         <Route exact path="/">
@@ -31,14 +18,22 @@ function Routes() {
         <Route exact path="/login" component={ Login } />
         <Route exact path="/register" component={ Register } />
 
-        <Route exact path="/customer/products" component={ Products } />
-        <Route exact path="/customer/products/:idVenda" />
-        <Route exact path="/customer/checkout" />
+        {
+          isAuth ? (
+            <>
+              <Route exact path="/customer/products" component={ Products } />
+              <Route exact path="/customer/products/:idVenda" />
+              <Route exact path="/customer/checkout" />
 
-        <Route exact path="/seller/order" />
-        <Route exact path="/seller/order/:id" component={ Order } />
+              <Route exact path="/seller/order" />
+              <Route exact path="/seller/order/:id" component={ Order } />
 
-        <Route exact path="/admin/manage" />
+              <Route exact path="/admin/manage" />
+            </>
+          ) : (
+            <Redirect to="/login" />
+          )
+        }
         {/* <Redirect to="/customer/products" /> */}
       </>
     );
