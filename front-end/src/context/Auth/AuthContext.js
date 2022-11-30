@@ -12,8 +12,6 @@ function AuthProvider({ children }) {
     [isAuth, loading, user, handleLogin, handleLogout],
   );
 
-  console.log('AuthProvider', memoizedValues);
-
   return (
     <AuthContext.Provider
       value={ memoizedValues }

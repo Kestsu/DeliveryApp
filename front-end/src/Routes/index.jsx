@@ -8,8 +8,6 @@ import Product from '../pages/Product';
 
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
-  console.log('isAuth', isAuth);
-  console.log('loading', loading);
 
   if (!isAuth && !loading) {
     return (
@@ -42,14 +40,15 @@ function Routes() {
         <Route exact path="/seller/order/id" />
 
         <Route exact path="/admin/manage" />
+        <Redirect to="/customer/products" />
       </>
     );
   }
 
   return (
-    <p>
+    <div>
       {loading && <p>loading...</p>}
-    </p>
+    </div>
   );
 }
 

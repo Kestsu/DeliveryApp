@@ -26,24 +26,12 @@ const useAuth = () => {
   api.interceptors.response.use(
     (response) => response,
     async (error) => {
-      // descomentar quando aplicar refresh token
-      // const originalRequest = error.config;
-      // if (error?.response?.status === forbiddenStatus && !originalRequest.retry) {
-      //   originalRequest.retry = true;
-
-      //   const { data } = await api.post('/auth/refresh_token');
-      //   if (data) {
-      //     localStorage.setItem('token', JSON.stringify(data.token));
-      //     api.defaults.headers.Authorization = `Bearer ${data.token}`;
-      //   }
-      //   return api(originalRequest);
-      // }
-
       if (error?.response?.status === unauthorizedStatus
         || error?.response?.status === forbiddenStatus) {
-        localStorage.removeItem('token');
+        localStorage.clear();
         api.defaults.headers.Authorization = undefined;
         setIsAuth(false);
+        history.push('/login');
       }
       return Promise.reject(error);
     },
@@ -51,35 +39,46 @@ const useAuth = () => {
 
   useEffect(() => {
     setLoading(true);
+
     const token = localStorage.getItem('token');
     const name = localStorage.getItem('name');
     const role = localStorage.getItem('role');
     const email = localStorage.getItem('email');
 
     (async () => {
-      if (token) {
+      if (token && name && role && email) {
         try {
-          // const { data } = await api.post('/auth/refresh_token');
+          // verificar se o token é válido
+          // const { data } = await api.get('/customer/products');
           api.defaults.headers.Authorization = `Bearer ${token}`;
-          setUser({ user: { name, role, email } });
+          setUser({ name, role, email });
           setIsAuth(true);
+          setLoading(false);
         } catch (err) {
-          console.log(err);
+          setLoading(false);
+          setUser({});
+          setIsAuth(false);
+          api.defaults.headers.Authorization = undefined;
+          localStorage.clear();
+          console.log('Tempo de requisição excedido (1000ms)');
         }
       }
-      console.log('loading context', loading);
+
       setLoading(false);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogin = async ({ userData }) => {
     setLoading(true);
 
     try {
+      // descomentar quando a rota auth estiver pronta
       // const { data } = await api.post('/auth/login', userData);
+      console.log(userData);
 
       // data de teste
-      console.log(userData);
+      // comentar quando a rota auth estiver pronta
       const data = {
         name: 'Tereza',
         email: 'tereza@gmail.com.br',
@@ -94,7 +93,6 @@ const useAuth = () => {
       api.defaults.headers.Authorization = `Bearer ${data.token}`;
       setUser(data.user);
       setIsAuth(true);
-      console.log('testando history');
       history.push('/customer/products');
       setLoading(false);
     } catch (err) {
@@ -106,14 +104,12 @@ const useAuth = () => {
   const handleLogout = async () => {
     setLoading(true);
 
-    console.log('testando logout');
-
     try {
-      // descomentar quando tiver o endpoint
+      // descomentar quando tiver o endpoint de blacklist token
       // await api.delete('/auth/logout');
       setIsAuth(false);
       setUser({});
-      localStorage.removeItem('token');
+      localStorage.clear();
       api.defaults.headers.Authorization = undefined;
       setLoading(false);
       history.push('/login');
