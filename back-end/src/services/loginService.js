@@ -1,7 +1,7 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 const { geraToken } = require('../utils/tokenGeneration');
-const InvalidCredentials = require('../errors/loginError');
+const { NotFoundError } = require('../errors');
 
 const getUser = async ({ email, password }) => {
   const user = await User.findOne({
@@ -12,7 +12,7 @@ const getUser = async ({ email, password }) => {
     },
   });
 
-  if (!user) throw new InvalidCredentials('Not found');
+  if (!user) throw new NotFoundError();
   
   const { name, role } = user.dataValues;
   
