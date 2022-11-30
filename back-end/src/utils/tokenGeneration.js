@@ -12,7 +12,7 @@ const geraToken = (campos) => {
 
   const data = {
     email: campos.email,
-    role: campos.role
+    role: campos.role,
   };
 
   const token = jwt.sign(data, secret, jwtConfig);
