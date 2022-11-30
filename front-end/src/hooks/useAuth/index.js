@@ -40,10 +40,10 @@ const useAuth = () => {
   useEffect(() => {
     setLoading(true);
 
-    const token = localStorage.getItem('token');
-    const name = localStorage.getItem('name');
-    const role = localStorage.getItem('role');
-    const email = localStorage.getItem('email');
+    const token = JSON.parse(localStorage.getItem('token'));
+    const name = JSON.parse(localStorage.getItem('name'));
+    const role = JSON.parse(localStorage.getItem('role'));
+    const email = JSON.parse(localStorage.getItem('email'));
 
     (async () => {
       if (token && name && role && email) {
@@ -81,7 +81,7 @@ const useAuth = () => {
       });
 
       api.defaults.headers.Authorization = `Bearer ${data.token}`;
-      setUser(data.user);
+      setUser(data);
       setIsAuth(true);
       history.push('/customer/products');
       setLoading(false);
