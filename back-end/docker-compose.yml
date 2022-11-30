@@ -20,6 +20,8 @@ services:
       # Monta o diretório atual, com todos os dados do projeto,
       # dentro do diretório /app
       - ./:/app
+    ports:
+      - 3001:3001
   db:
     container_name: app_delivery_db
     image: mysql:8.0.21
