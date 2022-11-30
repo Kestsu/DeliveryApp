@@ -40,7 +40,7 @@ function Routes() {
         <Route exact path="/seller/order/id" />
 
         <Route exact path="/admin/manage" />
-        <Redirect to="/customer/products" />
+        {/* <Redirect to="/customer/products" /> */}
       </>
     );
   }
