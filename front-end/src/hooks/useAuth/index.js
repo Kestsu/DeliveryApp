@@ -70,6 +70,7 @@ const useAuth = () => {
       // const { data } = await api.post('/auth/login', userData);
 
       // data de teste
+      console.log(userData);
       const data = { user: { role: 'administrator' }, token: '123' };
 
       localStorage.setItem('token', JSON.stringify(data.token));

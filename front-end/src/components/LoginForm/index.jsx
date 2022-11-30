@@ -73,7 +73,7 @@ function LoginForm() {
           data-testid="common_login__button-login"
           type="button"
           disabled={ disabled }
-          onClick={ () => handleLogin() }
+          onClick={ () => handleLogin({ userData: { email, password } }) }
         >
           LOGIN
         </button>
