@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../context/Auth/AuthContext';
 import rockGlass from '../../images/rockGlass.svg';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const { handleLogin } = useContext(AuthContext);
 
   const history = useHistory();
   useEffect(() => {
@@ -22,10 +24,10 @@ function LoginForm() {
     handleDisabled();
   }, [email, password]);
 
-  const handleLogin = () => {
-    // VERIFICAR SE EH VENDEDOR/ Cliente/ ADMIN
-    // const { history } = props;
-  };
+  // const handleLogin = () => {
+  //   // VERIFICAR SE EH VENDEDOR/ Cliente/ ADMIN
+  //   // const { history } = props;
+  // };
 
   const handleSign = () => {
     history.push('/register');
@@ -71,7 +73,7 @@ function LoginForm() {
           data-testid="common_login__button-login"
           type="button"
           disabled={ disabled }
-          onClick={ handleLogin }
+          onClick={ () => handleLogin() }
         >
           LOGIN
         </button>
