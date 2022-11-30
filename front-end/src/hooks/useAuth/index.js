@@ -52,12 +52,14 @@ const useAuth = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const name = localStorage.getItem('name');
+    const role = localStorage.getItem('role');
+    const email = localStorage.getItem('email');
     (async () => {
       if (token) {
         try {
           // const { data } = await api.post('/auth/refresh_token');
           api.defaults.headers.Authorization = `Bearer ${token}`;
-          setUser(name);
+          setUser({ user: { name, role, email } });
           setIsAuth(true);
         } catch (err) {
           console.log(err);
