@@ -1,4 +1,18 @@
-const { Sale, Products } = require('../database/models');
-const { NotFoundError } = require('../errors');
+const { Sale } = require('../database/models');
 
-module.exports = {};
+const getAllSales = async (user) => {
+  if (user.role === 'customer') {
+    const allSales = await Sale.findAll({ 
+      where: { userId: user.id },
+    });
+    return allSales;
+  }
+
+   const allSales = await Sale.findAll({ 
+    where: { sellerId: user.id },
+   });
+
+  return allSales;
+};
+
+module.exports = { getAllSales };
