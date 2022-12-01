@@ -76,8 +76,6 @@ const createSale = async (checkoutObj) => {
       transaction: t,
     });
 
-    console.log(id);
-
     await createSalesProductsNN(id, checkoutObj.products, t);
 
     await t.commit();
