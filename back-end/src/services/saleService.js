@@ -1,13 +1,62 @@
 require('dotenv/config');
 const Sequelize = require('sequelize');
 const { Sale, Product, SalesProducts, User } = require('../database/models');
-const { NotFoundError, UnexpectedError } = require('../errors');
+const {
+  NotFoundError,
+  UnexpectedError,
+  UnauthorizedError,
+} = require('../errors');
 
 const config = require('../database/config/config');
 
 const env = process.env.NODE_ENV || 'development';
 
 const sequelize = new Sequelize(config[env]);
+
+const checkUserPermission = (sale, user) => {
+  if (user.role === 'customer' && user.id === sale.userId) {
+    return 'OK';
+  }
+
+  if (user.role === 'seller' && user.id === sale.sellerId) {
+    return 'OK';
+  }
+
+  throw new UnauthorizedError();
+};
+
+const formatProductQuantity = (product) => {
+  const formatted = { ...product.dataValues };
+  delete formatted.SalesProducts;
+
+  formatted.quantity = product.SalesProducts.quantity;
+  return formatted;
+};
+
+const getSaleById = async (id, user) => {
+  try {
+    const { dataValues: sale } = await Sale.findOne({
+      where: { id },
+      include: [
+        {
+          model: Product,
+          as: 'products',
+        },
+      ],
+    });
+
+    if (!sale) throw new NotFoundError(`Produto de id: ${id} não encontrado`);
+
+    checkUserPermission(sale, user);
+
+    sale.products = sale.products.map(formatProductQuantity);
+
+    return sale;
+  } catch (error) {
+    if (error.status) throw error;
+    throw new UnexpectedError();
+  }
+};
 
 const createSalesProductsNN = async (saleId, products, t) => {
   try {
@@ -90,5 +139,6 @@ const createSale = async (checkoutObj) => {
 };
 
 module.exports = {
+  getSaleById,
   createSale,
 };
