@@ -34,9 +34,8 @@ const SaleModel = (sequelize, DataTypes) => {
       tableName: 'sales',
       underscored: true,
       timestamps: false,
-    },
+    }
   );
-
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, { as: 'user', foreignKey: 'userId' });
     Sale.belongsTo(models.User, { as: 'seller', foreignKey: 'sellerId' });
@@ -50,5 +49,4 @@ const SaleModel = (sequelize, DataTypes) => {
 
   return Sale;
 };
-
 module.exports = SaleModel;

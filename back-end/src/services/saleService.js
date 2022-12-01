@@ -13,6 +13,23 @@ const env = process.env.NODE_ENV || 'development';
 
 const sequelize = new Sequelize(config[env]);
 
+const validaRole = (user) => {
+  if (user.role === 'customer') {
+    return { userId: user.id };
+  }
+  return { sellerId: user.id };
+};
+
+const getAllSales = async (user) => {
+  const role = validaRole(user);
+
+  const allSales = await Sale.findAll({
+    where: role,
+  });
+
+  return allSales;
+};
+
 const checkUserPermission = (sale, user) => {
   if (user.role === 'customer' && user.id === sale.userId) {
     return 'OK';
@@ -139,6 +156,7 @@ const createSale = async (checkoutObj) => {
 };
 
 module.exports = {
+  getAllSales,
   getSaleById,
   createSale,
 };
