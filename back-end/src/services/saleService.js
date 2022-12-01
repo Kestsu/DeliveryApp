@@ -173,10 +173,19 @@ const checkBeforeUpdate = (newStatus, user) => {
 };
 
 const checkAndGetSaleAfterUpdate = async (id) => {
-  const sale = await Sale.findOne({ where: { id } });
+  const { dataValues: sale } = await Sale.findOne({
+    where: { id },
+    include: [
+      {
+        model: Product,
+        as: 'products',
+      },
+    ],
+  });
 
   if (!sale) throw new NotFoundError();
 
+  sale.products = sale.products.map(formatProductQuantity);
   return sale;
 };
 
