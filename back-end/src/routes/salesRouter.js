@@ -2,10 +2,10 @@ const express = require('express');
 
 const authMiddleware = require('../middleware/authMiddleware');
 
-const { getSales } = require('../controllers/saleController');
+const saleController = require('../controllers/saleController');
 
 const router = express.Router();
 
-router.get('/', authMiddleware, getSales);
+router.get('/', authMiddleware, saleController.getSales);
 
 module.exports = router;

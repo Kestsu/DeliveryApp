@@ -1,16 +1,18 @@
 const { Sale } = require('../database/models');
 
-const getAllSales = async (user) => {
+const validaRole = (user) => {
   if (user.role === 'customer') {
-    const allSales = await Sale.findAll({ 
-      where: { userId: user.id },
-    });
-    return allSales;
+    return { userId: user.id };
   }
+  return { sellerId: user.id };
+};
 
-   const allSales = await Sale.findAll({ 
-    where: { sellerId: user.id },
-   });
+const getAllSales = async (user) => {
+  const role = validaRole(user);
+
+  const allSales = await Sale.findAll({
+    where: role,
+  });
 
   return allSales;
 };
