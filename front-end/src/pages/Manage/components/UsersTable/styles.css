@@ -1,0 +1,14 @@
+table, thead, tbody {
+  width: 80%;
+}
+
+tr {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+td, th {
+  text-align: center;
+  width: 30%;
+}
