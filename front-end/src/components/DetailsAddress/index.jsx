@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../helpers/api';
 
 function DetailsAddress() {
@@ -8,7 +8,7 @@ function DetailsAddress() {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [disabled, setDisabled] = useState(true);
-  // const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -26,21 +26,21 @@ function DetailsAddress() {
 
   const payment = async () => {
     // const response = 'ID RETORNADO DO BACK'
-    // const data = await api.post('/sales', {
-    //   userId: 3,
-    //   sellerId: 2,
-    //   deliveryAddress: 'Logo alí',
-    //   deliveryNumber: '13',
-    //   products: [
-    //     {
-    //       id: 1,
-    //       quantity: 1,
-    //     },
-    //   ],
-    // });
+    await api.post('/sales', {
+      userId: 3,
+      sellerId: 2,
+      deliveryAddress: 'Logo alí',
+      deliveryNumber: '13',
+      products: [
+        {
+          id: 1,
+          quantity: 1,
+        },
+      ],
+    });
     // const oi = await api.get('/sales');
     // console.log(oi.data);
-    // history.push(`/customer/orders/${1}`);
+    history.push(`/customer/orders/${1}`);
   };
 
   return (
