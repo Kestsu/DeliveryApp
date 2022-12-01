@@ -18,9 +18,8 @@ const SalesProductsModel = (sequelize, DataTypes) => {
       tableName: 'sales_products',
       underscored: true,
       timestamps: false,
-    },
+    }
   );
-
   return SalesProducts;
 };
 
