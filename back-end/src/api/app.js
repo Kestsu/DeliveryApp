@@ -3,9 +3,10 @@ const express = require('express');
 const errorMiddleware = require('../middleware/errorMiddleware');
 
 const loginRouter = require('../routes/loginRouter');
-const checkRouter = require('../routes/checkRouter');
-const salesRouter = require('../routes/salesRouter');
 const productsRouter = require('../routes/productsRouter');
+const salesRouter = require('../routes/salesRouter');
+
+const checkRouter = require('../routes/checkRouter');
 
 const app = express();
 
@@ -17,9 +18,9 @@ app.use('/login', loginRouter);
 
 app.use('/products', productsRouter);
 
-app.use('/check', checkRouter);
-
 app.use('/sales', salesRouter);
+
+app.use('/check', checkRouter);
 
 app.use(errorMiddleware);
 
