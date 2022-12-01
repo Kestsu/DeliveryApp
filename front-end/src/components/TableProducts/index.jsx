@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Tabela from '../ProductAdd';
+import { AuthContext } from '../../context/Auth/AuthContext';
 
 const dada = [
   { description: 'OII', quantidade: 2, value: 2, SubTotal: 10 },
@@ -10,7 +12,9 @@ const dada = [
 
 function TableProducts() {
   const [Total, setTotal] = useState(0);
-  const [TypeURL] = useState('checkout');
+  const [TypeURL, setTypeURL] = useState('checkout');
+  const { handleRemoveProduct } = useContext(AuthContext);
+  const history = useHistory();
 
   const handleReflex = () => {
     const initialValue = 0;
@@ -23,8 +27,17 @@ function TableProducts() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (history.location.pathname !== '/customer/checkout') {
+      setTypeURL('OrdersDetails');
+    }
+
     handleReflex();
   }, []);
+  const removeProduct = () => {
+    handleRemoveProduct();
+    handleReflex();
+  };
 
   return (
     <div>
@@ -45,7 +58,7 @@ function TableProducts() {
               key={ item.id }
               index={ index }
               products={ item }
-              fun={ handleReflex }
+              fun={ removeProduct }
               type={ TypeURL }
             />
           ))}

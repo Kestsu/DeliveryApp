@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import api from '../../helpers/api';
 
 function DetailsAddress() {
@@ -7,6 +8,7 @@ function DetailsAddress() {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +25,8 @@ function DetailsAddress() {
   }, [seller, address, number]);
 
   const payment = () => {
-    console.log(seller, address, number);
+    // const response = 'ID RETORNADO DO BACK'
+    history.push(`/customer/orders/${1}`);
   };
 
   return (

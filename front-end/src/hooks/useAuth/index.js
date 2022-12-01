@@ -130,7 +130,30 @@ const useAuth = () => {
     }
   };
 
-  return { isAuth, loading, user, handleLogin, handleLogout, handleRegister };
+  const handleRemoveProduct = async (keyName) => {
+    setLoading(true);
+
+    try {
+      storage.removeItem(keyName);
+
+      // api.defaults.headers.Authorization = `Bearer ${data.token}`;
+      setIsAuth(true);
+
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
+
+  return {
+    isAuth,
+    loading,
+    user,
+    handleLogin,
+    handleLogout,
+    handleRegister,
+    handleRemoveProduct };
 };
 
 export default useAuth;

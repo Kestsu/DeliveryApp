@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Tabela(props) {
   const { type, fun, index, products } = props;
-  const { description, quantidade, value, SubTotal } = products;
+  const { description, quantity, price, SubTotal } = products;
 
   return (
     <tr>
@@ -26,14 +26,14 @@ function Tabela(props) {
           index + 1
         }` }
       >
-        {quantidade}
+        {quantity}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-unit-price-${
           index + 1
         }` }
       >
-        {value}
+        {price}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${
@@ -42,7 +42,7 @@ function Tabela(props) {
       >
         {SubTotal}
       </td>
-      {type ? (
+      {(type === 'checkout') ? (
         <td>
           <button
             data-testid={ `customer_checkout__element-order-table-remove-${
@@ -54,9 +54,7 @@ function Tabela(props) {
             Remover
           </button>
         </td>
-      ) : (
-        {}
-      )}
+      ) : ''}
     </tr>
   );
 }

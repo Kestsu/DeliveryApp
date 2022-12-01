@@ -6,6 +6,7 @@ import Register from '../pages/Register';
 import Products from '../pages/Products';
 import CustomerCheckout from '../pages/CustomerCheckout';
 import Order from '../pages/Order';
+import OrdersDetails from '../pages/OrdersDetails';
 
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
@@ -27,6 +28,7 @@ function Routes() {
               <Route exact path="/customer/products" component={ Products } />
               <Route exact path="/customer/products/:idVenda" />
               <Route exact path="/customer/checkout" component={ CustomerCheckout } />
+              <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
               <Route exact path="/customer/orders" />
 
               <Route exact path="/seller/order" />
