@@ -8,4 +8,14 @@ const getAllUsers = async (_req, res, next) => {
      next(error);
   }
 };
-module.exports = { getAllUsers };
+
+const createNewUser = async (req, res, next) => {
+  try {
+    const result = await adminService.createNewUser(req.body);
+    return res.status(201).json(result);
+  } catch (error) {
+     next(error);
+  }
+};
+
+module.exports = { getAllUsers, createNewUser };

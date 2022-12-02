@@ -10,4 +10,6 @@ const router = express.Router();
 
 router.get('/', authMiddleware, validateUserAdmin, adminController.getAllUsers);
 
+router.post('/', authMiddleware, validateUserAdmin, adminController.createNewUser);
+
 module.exports = router;
