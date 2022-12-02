@@ -5,7 +5,6 @@ const UnexpectedError = require('./UnexpectedError');
 const MissingFieldError = require('./MissingFieldError');
 const BadRequestError = require('./BadRequestError');
 
-
 module.exports = {
   NotFoundError,
   ConflictError,
