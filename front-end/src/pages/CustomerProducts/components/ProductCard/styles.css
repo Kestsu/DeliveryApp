@@ -5,12 +5,12 @@
 }
 
 .product-card {
+  align-items: center;
   border: 1px solid green;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   justify-content: space-between;
-  align-items: center;
+  overflow: hidden;
   padding: 0.5em;
   width: 25%;
 
