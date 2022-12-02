@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
-const { ConflictError, MissingFieldError } = require('../errors');
+const { ConflictError, MissingFieldError, BadRequestError } = require('../errors');
 
 const getUserAdmin = async () => {
   const userAdminAll = await User.findAll({});
@@ -41,7 +41,22 @@ const createNewUser = async (newUser) => {
   return novousuario;
 };
 
+const deleteUser = async (id) => {
+  const user = await User.findOne({
+    where: { id },
+  });
+
+  if (!user) throw new BadRequestError();
+
+  await User.destroy({
+    where: { id },
+  });
+
+  return { message: 'OK' };
+};
+
 module.exports = {
   getUserAdmin,
   createNewUser,
+  deleteUser,
 };
