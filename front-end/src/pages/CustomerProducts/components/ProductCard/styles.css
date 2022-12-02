@@ -6,6 +6,16 @@
 
 .product-card {
   border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5em;
   width: 25%;
+
+}
+
+.product-card-img {
+  height: 200px;
 }

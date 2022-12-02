@@ -54,6 +54,7 @@ function ProductCard({ id, name,
         { price }
       </p>
       <img
+        className="product-card-img"
         src={ urlImage }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
