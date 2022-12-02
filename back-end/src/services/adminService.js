@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
-const { ConflictError, MissingFieldError, BadRequestError } = require('../errors');
+const { ConflictError, MissingFieldError, NotFoundError } = require('../errors');
 
 const getUserAdmin = async () => {
   const userAdminAll = await User.findAll({});
@@ -46,7 +46,7 @@ const deleteUser = async (id) => {
     where: { id },
   });
 
-  if (!user) throw new BadRequestError();
+  if (!user) throw new NotFoundError();
 
   await User.destroy({
     where: { id },
