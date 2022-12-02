@@ -60,7 +60,7 @@ function UserForm({ usersList, setUsersList }) {
         E-mail:
         <input
           type="text"
-          id="name"
+          id="email"
           data-testid="common_register__input-email"
           value={ inputValues.email }
           onChange={ ({ target }) => setInputValues(
@@ -71,7 +71,7 @@ function UserForm({ usersList, setUsersList }) {
         Senha:
         <input
           type="password"
-          id="name"
+          id="password"
           data-testid="common_register__input-password"
           value={ inputValues.password }
           onChange={ ({ target }) => setInputValues(

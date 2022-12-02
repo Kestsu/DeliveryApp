@@ -4,8 +4,8 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import rockGlass from '../../images/rockGlass.svg';
 
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('adm@deliveryapp.com');
+  const [password, setPassword] = useState('--adm2@21!!--');
   const [disabled, setDisabled] = useState(true);
   const { handleLogin } = useContext(AuthContext);
 
@@ -74,7 +74,6 @@ function LoginForm() {
           type="button"
           disabled={ disabled }
           onClick={ () => handleLogin({ userData: { email, password } }) }
-          // onClick={ () => history.push('/customer/products') }
         >
           LOGIN
         </button>

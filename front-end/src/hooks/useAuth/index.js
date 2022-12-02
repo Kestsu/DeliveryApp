@@ -15,7 +15,7 @@ const useAuth = () => {
     (config) => {
       const token = localStorage.getItem('token');
       if (token) {
-        config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+        config.headers.Authorization = `${JSON.parse(token)}`;
         setIsAuth(true);
       }
       return config;
@@ -50,7 +50,7 @@ const useAuth = () => {
         try {
           // verificar se o token é válido
           // await api.get('/customer/products');
-          api.defaults.headers.Authorization = `Bearer ${token}`;
+          api.defaults.headers.Authorization = `${token}`;
           await api.get('/products');
           setUser({ name, role, email });
           setIsAuth(true);
@@ -80,10 +80,18 @@ const useAuth = () => {
         localStorage.setItem(key, JSON.stringify(data[key]));
       });
 
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
+      api.defaults.headers.Authorization = `${data.token}`;
       setUser(data);
       setIsAuth(true);
-      history.push('/customer/products');
+
+      if (data.role === 'customer') {
+        history.push('/customer/products');
+      } else if (data.role === 'seller') {
+        history.push('/seller/order');
+      } else if (data.role === 'administrator') {
+        history.push('/admin/manage');
+      }
+
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -119,7 +127,7 @@ const useAuth = () => {
         localStorage.setItem(key, JSON.stringify(data[key]));
       });
 
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
+      api.defaults.headers.Authorization = `${data.token}`;
       setUser(data.user);
       setIsAuth(true);
       history.push('/customer/products');

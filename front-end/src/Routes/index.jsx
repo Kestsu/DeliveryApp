@@ -11,7 +11,6 @@ import Manage from '../pages/Manage';
 function Routes() {
   const { isAuth, loading } = useContext(AuthContext);
   const { pathname } = useLocation();
-  console.log('pathname', pathname);
 
   if (!loading) {
     return (
