@@ -4,8 +4,8 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import rockGlass from '../../images/rockGlass.svg';
 
 function LoginForm() {
-  const [email, setEmail] = useState('adm@deliveryapp.com');
-  const [password, setPassword] = useState('--adm2@21!!--');
+  const [email, setEmail] = useState('zebirita@email.com');
+  const [password, setPassword] = useState('$#zebirita#$');
   const [disabled, setDisabled] = useState(true);
   const { handleLogin } = useContext(AuthContext);
 

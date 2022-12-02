@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import Tabela from '../ProductAdd';
 
-const dada = [
-  { description: 'OII', quantidade: 2, value: 2, SubTotal: 10 },
-  { description: 'OII', quantidade: 2, value: 2, SubTotal: 10 },
-  { description: 'OII', quantidade: 2, value: 2, SubTotal: 10 },
-  { description: 'OII', quantidade: 2, value: 2, SubTotal: 10 },
-];
-
 function TableProducts() {
   const [Total, setTotal] = useState(0);
+  const [products, setProducts] = useState([]);
   const [TypeURL] = useState('checkout');
 
-  const handleReflex = () => {
-    const initialValue = 0;
-    const soma = dada.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.quantidade,
-      initialValue,
-    );
-    setTotal(soma);
-  };
+  useEffect(() => {
+    const storagedProducts = JSON.parse(localStorage.getItem('products'));
+    setProducts(storagedProducts);
+
+    // set total price
+  }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    handleReflex();
-  }, []);
+    const storagedProducts = JSON.parse(localStorage.getItem('products'));
+    let total = 0;
+    storagedProducts.forEach((product) => {
+      total += Number(product.price) * Number(product.quantity);
+    });
+    setTotal(total.toFixed(2));
+  }, [products]);
+
+  const removeItem = (index) => {
+    const newProducts = products.filter((_, i) => i !== index);
+    setProducts(newProducts);
+    localStorage.setItem('products', JSON.stringify(newProducts));
+  };
 
   return (
     <div>
@@ -40,13 +42,13 @@ function TableProducts() {
           </tr>
         </thead>
         <tbody>
-          {dada.map((item, index) => (
+          {products.map((item, index) => (
             <Tabela
               key={ item.id }
               index={ index }
-              products={ item }
-              fun={ handleReflex }
+              item={ item }
               type={ TypeURL }
+              removeItem={ removeItem }
             />
           ))}
         </tbody>
