@@ -5,6 +5,7 @@ const {
   NotFoundError,
   UnexpectedError,
   UnauthorizedError,
+  BadRequestError,
 } = require('../errors');
 
 const config = require('../database/config/config');
@@ -155,8 +156,57 @@ const createSale = async (checkoutObj) => {
   }
 };
 
+const isStatusSupported = (statusToCheck) => {
+  const supportedStatus = {
+    Preparando: 'seller',
+    'Em Trânsito': 'seller',
+    Entregue: 'customer',
+  };
+
+  return supportedStatus[statusToCheck] || false;
+};
+
+const checkBeforeUpdate = (newStatus, user) => {
+  const statusCheck = isStatusSupported(newStatus);
+  if (!statusCheck) throw new BadRequestError('Status não suportado');
+  if (statusCheck !== user.role) throw new UnauthorizedError();
+};
+
+const checkAndGetSaleAfterUpdate = async (id) => {
+  const { dataValues: sale } = await Sale.findOne({
+    where: { id },
+    include: [
+      {
+        model: Product,
+        as: 'products',
+      },
+    ],
+  });
+
+  if (!sale) throw new NotFoundError();
+
+  sale.products = sale.products.map(formatProductQuantity);
+  return sale;
+};
+
+const updateSaleStatus = async (id, newStatus, user) => {
+  try {
+    checkBeforeUpdate(newStatus, user);
+
+    await Sale.update({ status: newStatus }, { where: { id } });
+
+    const updatedSale = await checkAndGetSaleAfterUpdate(id);
+
+    return updatedSale;
+  } catch (error) {
+    if (error.status) throw error;
+    throw new UnexpectedError();
+  }
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
   createSale,
+  updateSaleStatus,
 };

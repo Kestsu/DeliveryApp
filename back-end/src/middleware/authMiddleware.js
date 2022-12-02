@@ -21,6 +21,8 @@ module.exports = async (req, res, next) => {
     next();
   } catch (error) {
     const unauthorizedError = new UnauthorizedError();
-    res.status(unauthorizedError.status).json(unauthorizedError.message);
+    res
+      .status(unauthorizedError.status)
+      .json({ message: unauthorizedError.message });
   }
 };
