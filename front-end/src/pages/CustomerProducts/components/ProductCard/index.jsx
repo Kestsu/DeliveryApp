@@ -4,7 +4,7 @@ import './styles.css';
 
 function ProductCard({ id, name,
   price, urlImage, quantity, listProducts, setListProducts,
-  totalQty, setTotalQty, index, sumTotal,
+  totalQty, setTotalQty, index, sumTotal, setTotalPrice,
 }) {
   const updateLocalStorage = (newListProducts) => {
     localStorage.setItem(
@@ -21,7 +21,7 @@ function ProductCard({ id, name,
     setListProducts(listProducts);
     updateLocalStorage(listProducts);
     setTotalQty(totalQty + 1);
-    sumTotal();
+    sumTotal(listProducts, setTotalPrice);
   };
 
   const removeProduct = () => {
@@ -32,7 +32,7 @@ function ProductCard({ id, name,
     setListProducts(listProducts);
     updateLocalStorage(listProducts);
     setTotalQty(totalQty - 1);
-    sumTotal();
+    sumTotal(listProducts, setTotalPrice);
   };
 
   const inputQuantity = (value) => {
@@ -43,7 +43,7 @@ function ProductCard({ id, name,
     setListProducts(listProducts);
     updateLocalStorage(listProducts);
     setTotalQty(totalQty - quantity + Number(value));
-    sumTotal();
+    sumTotal(listProducts, setTotalPrice);
   };
 
   return (
@@ -113,6 +113,7 @@ ProductCard.propTypes = {
   setTotalQty: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   sumTotal: PropTypes.func.isRequired,
+  setTotalPrice: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

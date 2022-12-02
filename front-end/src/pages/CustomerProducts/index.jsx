@@ -5,6 +5,18 @@ import api from '../../helpers/api';
 import ProductCard from './components/ProductCard';
 import './styles.css';
 
+const sumReduce = (total, item) => {
+  if (item.quantity) {
+    return total + (Number(item.price) * item.quantity);
+  }
+  return total;
+};
+
+const sumTotal = (data, setTotalPrice) => {
+  const total = data.reduce(sumReduce, 0);
+  setTotalPrice(total.toFixed(2));
+};
+
 function CustomerProducts() {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
@@ -35,26 +47,13 @@ function CustomerProducts() {
           setTotalQty(Number(qty));
           setListProducts(data);
           setLoading(false);
+          sumTotal(data, setTotalPrice);
         }
       )();
     } catch (error) {
       console.log(error);
     }
   }, []);
-
-  console.log(totalPrice);
-
-  const sumReduce = (total, item) => {
-    if (item.quantity) {
-      return total + (Number(item.price) * item.quantity);
-    }
-    return total;
-  };
-
-  const sumTotal = () => {
-    const total = listProducts.reduce(sumReduce, 0);
-    setTotalPrice(total.toFixed(2));
-  };
 
   const clickCheckoutButton = () => {
     history.push('/customer/checkout');
