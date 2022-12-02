@@ -18,10 +18,14 @@ function UserForm({ usersList, setUsersList }) {
       && inputValues.email.match(valid)
       && inputValues.name.length > twenteen
     ) {
-      const { data } = await api.post('/users', inputValues);
-      setIsValid(true);
-      const newUsersList = [...usersList, data];
-      setUsersList(newUsersList);
+      try {
+        const { data } = await api.post('/users', inputValues);
+        setIsValid(true);
+        const newUsersList = [...usersList, data];
+        setUsersList(newUsersList);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       setIsValid(false);
     }
