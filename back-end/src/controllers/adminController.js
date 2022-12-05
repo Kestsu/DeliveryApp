@@ -18,4 +18,14 @@ const createNewUser = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllUsers, createNewUser };
+const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await adminService.deleteUser(Number(id));
+    return res.status(200).json(result);
+  } catch (error) {
+     next(error);
+  }
+};
+
+module.exports = { getAllUsers, createNewUser, deleteUser };
