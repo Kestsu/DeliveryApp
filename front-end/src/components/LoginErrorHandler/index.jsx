@@ -6,7 +6,7 @@ function LoginErrorHandler({ message }) {
     <div>
       <p
         id="error"
-        data-testid="common_register__button-register"
+        data-testid="common_login__element-invalid-email"
       >
         {message}
 

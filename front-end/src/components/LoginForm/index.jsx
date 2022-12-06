@@ -5,8 +5,10 @@ import rockGlass from '../../images/rockGlass.svg';
 import LoginErrorHandler from '../LoginErrorHandler';
 
 function LoginForm() {
-  const [email, setEmail] = useState('zebirita@email.com');
-  const [password, setPassword] = useState('$#zebirita#$');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('zebirita@email.com');
+  // const [password, setPassword] = useState('$#zebirita#$');
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState('');
   const { handleLogin } = useContext(AuthContext);
@@ -17,7 +19,7 @@ function LoginForm() {
       const isValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
       const six = 6;
 
-      if (password.length > six && email.match(isValid)) {
+      if (password.length >= six && email.match(isValid)) {
         setError('');
         setDisabled(false);
       } else {
