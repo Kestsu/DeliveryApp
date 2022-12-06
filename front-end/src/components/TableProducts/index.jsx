@@ -61,7 +61,7 @@ function TableProducts({ list, setProducts }) {
           ))}
         </tbody>
       </table>
-      <div>{`Total: R$${Total.toFixed(2)}`}</div>
+      <div>{`Total: R$${Total.toFixed(2).replace('.', ',')}`}</div>
     </div>
   );
 }

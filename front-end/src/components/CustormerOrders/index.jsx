@@ -11,6 +11,7 @@ function CustormerOrders() {
       const { data } = await api.get('/sales');
       setOrders(data);
     };
+    console.log('TO AQWUI');
     response();
   }, []);
 
@@ -49,7 +50,7 @@ function CustormerOrders() {
             key={ item.totalPrice }
             data-testid={ `customer_orders__element-card-price-${item.sellerId}` }
           >
-            {item.totalPrice}
+            {item.totalPrice.replace('.', ',')}
           </p>
         </div>
       ))}

@@ -97,7 +97,7 @@ function CustomerProducts() {
       >
         Ver Carrinho:   Valor Total R$:
         <span data-testid="customer_products__checkout-bottom-value">
-          { totalPrice.replace('.', ',') }
+          { totalPrice }
         </span>
       </button>
     </div>

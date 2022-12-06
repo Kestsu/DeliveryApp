@@ -8,7 +8,7 @@ function Tabela(props) {
 
   useEffect(() => {
     const mult = (Number(quantity) * Number(price)).toFixed(2);
-    setSubTotal(mult);
+    setSubTotal(mult.replace('.', ','));
   }, []);
 
   return (
@@ -39,7 +39,7 @@ function Tabela(props) {
           index + 1
         }` }
       >
-        {`R$${price}`}
+        {`R$${price.replace('.', ',')}`}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${
@@ -67,11 +67,14 @@ function Tabela(props) {
 
 Tabela.propTypes = {
   index: PropTypes.number.isRequired,
-  products: PropTypes.string.isRequired,
   fun: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    replace: PropTypes.func.isRequired,
+  })).isRequired,
 };
 
 export default Tabela;
-
-// tester
