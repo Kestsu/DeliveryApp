@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const { NotFoundError } = require('../errors');
+const { NotFoundError, UnexpectedError } = require('../errors');
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({
@@ -14,6 +14,22 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
+const getAllSellers = async () => {
+  try {
+    const sellers = await User.findAll({
+      where: {
+        role: 'seller',
+      },
+      attributes: { exclude: ['password'] },
+    });
+
+    return sellers;
+  } catch (error) {
+    throw UnexpectedError();
+  }
+};
+
 module.exports = {
   getUserByEmail,
+  getAllSellers,
 };
