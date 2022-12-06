@@ -14,7 +14,7 @@ function CustomerCheckout() {
     <div>
       <Header />
       <p>Finalizar Pedido</p>
-      <TableProducts list={ products } />
+      <TableProducts list={ products } setProducts={ setProducts } />
       <DetailsAddress />
     </div>
   );

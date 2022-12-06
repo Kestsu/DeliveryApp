@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import api from '../../helpers/api';
 
 function DetailsAddress() {
-  const [seller, setSeller] = useState('');
   const [users, setUsers] = useState([]);
+  const [seller, setSeller] = useState({});
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/users');
-      const response = data.map((item) => item.role === 'customer');
-      setUsers(response);
+      const { data } = await api.get('/sellers');
+      setUsers(data);
+      const firstSeller = data[0];
+      setSeller(firstSeller);
     })();
   }, []);
 
@@ -25,22 +26,18 @@ function DetailsAddress() {
   }, [seller, address, number]);
 
   const payment = async () => {
-    // const response = 'ID RETORNADO DO BACK'
-    await api.post('/sales', {
-      userId: 3,
-      sellerId: 2,
-      deliveryAddress: 'Logo alí',
-      deliveryNumber: '13',
-      products: [
-        {
-          id: 1,
-          quantity: 1,
-        },
-      ],
+    const response = localStorage.getItem('products');
+    const products = JSON.parse(response);
+
+    const res = await api.post('/sales', {
+      sellerId: seller.id,
+      deliveryAddress: address,
+      deliveryNumber: number,
+      products,
     });
-    // const oi = await api.get('/sales');
-    // console.log(oi.data);
-    history.push(`/customer/orders/${1}`);
+    console.log(res);
+
+    // history.push(`/customer/orders/${1}`);
   };
 
   return (
@@ -54,13 +51,14 @@ function DetailsAddress() {
             id="seller"
             value={ seller }
             data-testid="customer_checkout__select-seller"
+            defaultValue={ users[0] || '' }
             onChange={ () => {
               setSeller(seller);
             } }
           >
             {users.map((item) => (
-              <option key={ item.id } value={ item.name }>
-                {item.name}
+              <option key={ item?.id } value={ item }>
+                {item?.name}
               </option>
             ))}
           </select>

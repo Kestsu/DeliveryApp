@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 import Tabela from '../Tabela';
 import { AuthContext } from '../../context/Auth/AuthContext';
 
-function TableProducts({ list }) {
+function TableProducts({ list, setProducts }) {
   const [Total, setTotal] = useState(0);
   const [TypeURL, setTypeURL] = useState('checkout');
   const { handleRemoveProduct } = useContext(AuthContext);
   const history = useHistory();
 
-  const handleReflex = () => {
+  const handleReflex = (lista) => {
     const initialValue = 0;
-    const soma = list.reduce(
-      (accumulator, currentValue) => accumulator + Number(currentValue.price),
+
+    const soma = lista.reduce(
+      (accumulator, currentValue) => accumulator
+      + (Number(currentValue.price) * Number(currentValue.quantity)),
       initialValue,
     );
+
     setTotal(soma);
   };
 
@@ -25,11 +28,11 @@ function TableProducts({ list }) {
     if (history.location.pathname !== '/customer/checkout') {
       setTypeURL('OrdersDetails');
     }
+    handleReflex(list);
+  }, [list]);
+  const removeProduct = (id) => {
+    handleRemoveProduct(id, setProducts);
 
-    handleReflex();
-  }, []);
-  const removeProduct = () => {
-    handleRemoveProduct();
     handleReflex();
   };
 
@@ -52,7 +55,7 @@ function TableProducts({ list }) {
               key={ item.id }
               index={ index }
               products={ item }
-              fun={ removeProduct }
+              fun={ () => removeProduct(item.id) }
               type={ TypeURL }
             />
           ))}
@@ -64,6 +67,7 @@ function TableProducts({ list }) {
 }
 
 TableProducts.propTypes = {
+  setProducts: PropTypes.func.isRequired,
   list: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

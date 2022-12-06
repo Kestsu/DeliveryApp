@@ -141,13 +141,15 @@ const useAuth = () => {
     }
   };
 
-  const handleRemoveProduct = async (keyName) => {
+  const handleRemoveProduct = async (id, setProducts) => {
     setLoading(true);
 
     try {
-      storage.removeItem(keyName);
+      const localGetItems = JSON.parse(localStorage.getItem('products'));
+      const newItems = localGetItems.filter((item) => item.id !== id);
+      localStorage.setItem('products', JSON.stringify(newItems));
+      setProducts(newItems);
 
-      // api.defaults.headers.Authorization = `Bearer ${data.token}`;
       setIsAuth(true);
 
       setLoading(false);
