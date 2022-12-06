@@ -95,9 +95,9 @@ function CustomerProducts() {
         disabled={ totalPrice === 0 }
         onClick={ clickCheckoutButton }
       >
+        Ver Carrinho:   Valor Total R$:
         <span data-testid="customer_products__checkout-bottom-value">
-          Ver Carrinho:   Valor Total R$:
-          { totalPrice }
+          { totalPrice.replace('.', ',') }
         </span>
       </button>
     </div>
