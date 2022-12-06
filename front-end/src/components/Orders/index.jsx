@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../../helpers/api';
 
+const quatro = 4;
+
 function Orders() {
   const [orders, setOrders] = useState([]);
   const [role, setRole] = useState([]);
@@ -32,7 +34,7 @@ function Orders() {
             key={ item.id }
             data-testid={ `customer_orders__element-order-id-${item.id}` }
           >
-            {`Pedido ${item.id}`}
+            {`PEDIDO ${`${item?.id}`?.padStart(quatro, '0')}`}
           </p>
 
           <button

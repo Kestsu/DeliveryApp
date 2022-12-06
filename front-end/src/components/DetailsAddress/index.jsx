@@ -28,15 +28,20 @@ function DetailsAddress() {
   const payment = async () => {
     const response = localStorage.getItem('products');
     const products = JSON.parse(response);
+    try {
+      const { data } = await api.post('/sales', {
+        sellerId: seller.id,
+        deliveryAddress: address,
+        deliveryNumber: number,
+        products,
+      });
 
-    const { data } = await api.post('/sales', {
-      sellerId: seller.id,
-      deliveryAddress: address,
-      deliveryNumber: number,
-      products,
-    });
+      localStorage.removeItem('products');
 
-    history.push(`/customer/orders/${data.saleId}`);
+      history.push(`/customer/orders/${data.saleId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

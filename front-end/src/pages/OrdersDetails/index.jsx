@@ -10,6 +10,7 @@ function OrdersDetails() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
+  const [status, setStatusAtual] = useState('');
   const [date, setDate] = useState('');
   const { id } = useParams();
 
@@ -17,11 +18,11 @@ function OrdersDetails() {
     (async () => {
       const { data } = await api.get(`/sales/${id}`);
       setOrder(data);
+      setStatusAtual(data.status.toUpperCase());
       setProducts(data.products);
       const saleDate = new Date(data.saleDate);
       const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
       setDate(saleDate.toLocaleDateString('pt-BR', options));
-      console.log(order);
 
       setLoading(false);
     })();
@@ -29,8 +30,9 @@ function OrdersDetails() {
 
   const updateStatus = async () => {
     try {
-      const response = await api.patch(`/sales/${id}`, { status: 'ENTREGUE' });
-      setStatusAtual(response.data.status);
+      const response = await api.patch(`/sales/${id}`, { status: 'Entregue' });
+
+      setStatusAtual(response.data.status.toUpperCase());
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +46,7 @@ function OrdersDetails() {
           {`PEDIDO ${`${order?.id}`?.padStart(quatro, '0')}`}
         </p>
         <p data-testid="customer_order_details__element-order-details-label-seller-name">
-          {'P. Vend: '}
+          {`P. Vend: ${order?.seller?.name} `}
         </p>
         <p data-testid="customer_order_details__element-order-details-label-order-date">
           {date}
@@ -53,7 +55,7 @@ function OrdersDetails() {
           data-testid={ `customer_
           order_details__element-order-details-label-delivery-status` }
         >
-          {order.status}
+          {status}
         </p>
         <button
           type="button"
