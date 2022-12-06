@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../helpers/api';
 
 function DetailsAddress() {
@@ -8,7 +8,7 @@ function DetailsAddress() {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [disabled, setDisabled] = useState(true);
-  // const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -29,15 +29,14 @@ function DetailsAddress() {
     const response = localStorage.getItem('products');
     const products = JSON.parse(response);
 
-    const res = await api.post('/sales', {
+    const { data } = await api.post('/sales', {
       sellerId: seller.id,
       deliveryAddress: address,
       deliveryNumber: number,
       products,
     });
-    console.log(res);
 
-    // history.push(`/customer/orders/${1}`);
+    history.push(`/customer/orders/${data.saleId}`);
   };
 
   return (
