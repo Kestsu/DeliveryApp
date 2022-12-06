@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import TableProducts from '../../components/TableProducts';
 import Header from '../../components/Header';
+import api from '../../helpers/api';
 
 function OrdersDetails() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await api.get(`/sales/${id}`);
+
+      setProducts(data.products);
+      setLoading(false);
+    })();
+    console.log(products);
+  }, []);
   const changeStatus = () => {
     console.log('chegou o pedido');
   };
@@ -36,9 +51,13 @@ function OrdersDetails() {
         </button>
       </div>
       <p>Detalhe do Pedido</p>
-      <div>
-        <TableProducts />
-      </div>
+      {loading ? (
+        <h1>carregando...</h1>
+      ) : (
+        <div>
+          <TableProducts list={ products } />
+        </div>
+      )}
     </div>
   );
 }

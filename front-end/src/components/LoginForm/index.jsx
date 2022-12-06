@@ -2,36 +2,41 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import rockGlass from '../../images/rockGlass.svg';
+import LoginErrorHandler from '../LoginErrorHandler';
 
 function LoginForm() {
   const [email, setEmail] = useState('zebirita@email.com');
   const [password, setPassword] = useState('$#zebirita#$');
   const [disabled, setDisabled] = useState(true);
+  const [error, setError] = useState('');
   const { handleLogin } = useContext(AuthContext);
-
   const history = useHistory();
+
   useEffect(() => {
     const handleDisabled = () => {
       const isValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
       const six = 6;
 
       if (password.length > six && email.match(isValid)) {
+        setError('');
         setDisabled(false);
       } else {
+        setError('Digite um email e password válido');
         setDisabled(true);
       }
     };
     handleDisabled();
   }, [email, password]);
 
-  // const handleLogin = () => {
-  //   // VERIFICAR SE EH VENDEDOR/ Cliente/ ADMIN
-  //   // const { history } = props;
-  // };
-
-  const handleSign = () => {
+  const handleRegister = () => {
     history.push('/register');
   };
+
+  const handleSign = async () => {
+    await handleLogin({ userData: { email, password } });
+    setError('Digite um email e password válido');
+  };
+
   return (
     <div>
       <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
@@ -73,7 +78,7 @@ function LoginForm() {
           data-testid="common_login__button-login"
           type="button"
           disabled={ disabled }
-          onClick={ () => handleLogin({ userData: { email, password } }) }
+          onClick={ handleSign }
         >
           LOGIN
         </button>
@@ -81,12 +86,12 @@ function LoginForm() {
         <button
           data-testid="common_login__button-register"
           type="button"
-          onClick={ handleSign }
+          onClick={ handleRegister }
         >
           Ainda não tenho conta
         </button>
       </div>
-
+      <LoginErrorHandler message={ error } />
     </div>
   );
 }

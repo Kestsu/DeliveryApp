@@ -79,20 +79,21 @@ const useAuth = () => {
       Object.keys(data).forEach((key) => {
         localStorage.setItem(key, JSON.stringify(data[key]));
       });
+      if (!data.message) {
+        api.defaults.headers.Authorization = `${data.token}`;
+        setUser(data);
+        setIsAuth(true);
 
-      api.defaults.headers.Authorization = `${data.token}`;
-      setUser(data);
-      setIsAuth(true);
-
-      if (data.role === 'customer') {
-        history.push('/customer/products');
-      } else if (data.role === 'seller') {
-        history.push('/seller/order');
-      } else if (data.role === 'administrator') {
-        history.push('/admin/manage');
+        if (data.role === 'customer') {
+          history.push('/customer/products');
+        } else if (data.role === 'seller') {
+          history.push('/seller/order');
+        } else if (data.role === 'administrator') {
+          history.push('/admin/manage');
+        }
       }
-
       setLoading(false);
+      return 'error';
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -122,16 +123,18 @@ const useAuth = () => {
 
     try {
       const { data } = await api.post('/register', userData);
+      if (!data.message) {
+        Object.keys(data).forEach((key) => {
+          localStorage.setItem(key, JSON.stringify(data[key]));
+        });
 
-      Object.keys(data).forEach((key) => {
-        localStorage.setItem(key, JSON.stringify(data[key]));
-      });
-
-      api.defaults.headers.Authorization = `${data.token}`;
-      setUser(data.user);
-      setIsAuth(true);
-      history.push('/customer/products');
+        api.defaults.headers.Authorization = `${data.token}`;
+        setUser(data.user);
+        setIsAuth(true);
+        history.push('/customer/products');
+      }
       setLoading(false);
+      return 'Ja existe';
     } catch (err) {
       console.log(err);
       setLoading(false);

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/Auth/AuthContext';
+import LoginErrorHandler from '../LoginErrorHandler';
 
 function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [error, setError] = useState('');
   const { handleRegister } = useContext(AuthContext);
 
   useEffect(() => {
@@ -14,9 +16,20 @@ function RegisterForm() {
       const six = 6;
       const twenteen = 12;
 
+      if (name.length <= twenteen) {
+        setError('Digite um nome com mais de 12 caracteres');
+      }
+      if (email.match(isValid) === null) {
+        setError('Digite um email válido');
+      }
+      if (password.length <= six) {
+        setError('Digite uma senha com mais de 6 digitos');
+      }
+
       if (password.length > six
         && email.match(isValid)
         && name.length > twenteen) {
+        setError('');
         setDisabled(false);
       } else {
         setDisabled(true);
@@ -24,6 +37,11 @@ function RegisterForm() {
     };
     handleDisabled();
   }, [email, password, name]);
+
+  const handleNewUser = async () => {
+    await handleRegister({ userData: { name, email, password } });
+    setError('Email já existente');
+  };
 
   return (
     <div>
@@ -77,12 +95,14 @@ function RegisterForm() {
           data-testid="common_register__button-register"
           type="button"
           disabled={ disabled }
-          onClick={ () => handleRegister({ userData: { name, email, password } }) }
+          onClick={ handleNewUser }
         >
           CADASTRAR
         </button>
       </div>
-
+      <div>
+        <LoginErrorHandler message={ error } />
+      </div>
     </div>
   );
 }

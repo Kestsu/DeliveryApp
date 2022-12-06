@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Tabela from '../Tabela';
+import { AuthContext } from '../../context/Auth/AuthContext';
 
-function TableProducts() {
+function TableProducts({ list }) {
   const [Total, setTotal] = useState(0);
-  const [products, setProducts] = useState([]);
-  const [TypeURL] = useState('checkout');
+  const [TypeURL, setTypeURL] = useState('checkout');
+  const { handleRemoveProduct } = useContext(AuthContext);
+  const history = useHistory();
+
+  const handleReflex = () => {
+    const initialValue = 0;
+    const soma = list.reduce(
+      (accumulator, currentValue) => accumulator + Number(currentValue.price),
+      initialValue,
+    );
+    setTotal(soma);
+  };
 
   useEffect(() => {
-    const storagedProducts = JSON.parse(localStorage.getItem('products'));
-    setProducts(storagedProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    // set total price
+    if (history.location.pathname !== '/customer/checkout') {
+      setTypeURL('OrdersDetails');
+    }
+
+    handleReflex();
   }, []);
-
-  useEffect(() => {
-    const storagedProducts = JSON.parse(localStorage.getItem('products'));
-    let total = 0;
-    storagedProducts.forEach((product) => {
-      total += Number(product.price) * Number(product.quantity);
-    });
-    setTotal(total.toFixed(2));
-  }, [products]);
-
-  const removeItem = (index) => {
-    const newProducts = products.filter((_, i) => i !== index);
-    setProducts(newProducts);
-    localStorage.setItem('products', JSON.stringify(newProducts));
+  const removeProduct = () => {
+    handleRemoveProduct();
+    handleReflex();
   };
 
   return (
@@ -42,19 +47,30 @@ function TableProducts() {
           </tr>
         </thead>
         <tbody>
-          {products.map((item, index) => (
+          {list?.map((item, index) => (
             <Tabela
               key={ item.id }
               index={ index }
-              item={ item }
+              products={ item }
+              fun={ removeProduct }
               type={ TypeURL }
-              removeItem={ removeItem }
             />
           ))}
         </tbody>
       </table>
-      <div>{`Total: R$${Total}`}</div>
+      <div>{`Total: R$${Total.toFixed(2)}`}</div>
     </div>
   );
 }
+
+TableProducts.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+  })).isRequired,
+};
+
 export default TableProducts;

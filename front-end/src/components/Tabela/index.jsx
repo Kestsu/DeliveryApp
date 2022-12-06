@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Tabela(props) {
-  const { type, index, item, removeItem } = props;
-  const { name, quantity, price } = item;
+  const { type, fun, index, products } = props;
+  const { name, quantity, price } = products;
+  const [subTotal, setSubTotal] = useState([]);
+
+  useEffect(() => {
+    const mult = (Number(quantity) * Number(price)).toFixed(2);
+    setSubTotal(mult);
+  }, []);
 
   return (
     <tr>
@@ -33,14 +39,14 @@ function Tabela(props) {
           index + 1
         }` }
       >
-        {price}
+        {`R$${price}`}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${
           index + 1
         }` }
       >
-        {(quantity * price).toFixed(2)}
+        {`R$${subTotal}`}
       </td>
       {(type === 'checkout') ? (
         <td>
@@ -49,7 +55,7 @@ function Tabela(props) {
               index + 1
             }` }
             type="button"
-            onClick={ () => removeItem(index) }
+            onClick={ () => fun() }
           >
             Remover
           </button>
@@ -61,14 +67,9 @@ function Tabela(props) {
 
 Tabela.propTypes = {
   index: PropTypes.number.isRequired,
-  item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-    price: PropTypes.string.isRequired,
-  }).isRequired,
+  products: PropTypes.string.isRequired,
+  fun: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  removeItem: PropTypes.func.isRequired,
 };
 
 export default Tabela;
