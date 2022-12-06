@@ -57,6 +57,11 @@ const getSaleById = async (id, user) => {
       where: { id },
       include: [
         {
+          model: User,
+          as: 'seller',
+          attributes: { exclude: ['password'] },
+        },
+        {
           model: Product,
           as: 'products',
         },
