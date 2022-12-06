@@ -146,7 +146,7 @@ const createSale = async (checkoutObj) => {
     await createSalesProductsNN(id, checkoutObj.products, t);
 
     await t.commit();
-    return { message: 'Created' };
+    return { saleId: id };
   } catch (error) {
     await t.rollback();
 
