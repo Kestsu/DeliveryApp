@@ -42,7 +42,7 @@ function Tabela(props) {
       >
         {(quantity * price).toFixed(2)}
       </td>
-      {type ? (
+      {(type === 'checkout') ? (
         <td>
           <button
             data-testid={ `customer_checkout__element-order-table-remove-${
@@ -54,9 +54,7 @@ function Tabela(props) {
             Remover
           </button>
         </td>
-      ) : (
-        {}
-      )}
+      ) : ''}
     </tr>
   );
 }

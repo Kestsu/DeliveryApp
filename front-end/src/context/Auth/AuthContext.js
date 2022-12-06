@@ -5,17 +5,39 @@ import useAuth from '../../hooks/useAuth';
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const { isAuth, loading, user, handleLogin, handleLogout, handleRegister } = useAuth();
+  const {
+    isAuth,
+    loading,
+    user,
+    handleLogin,
+    handleLogout,
+    handleRegister,
+    handleRemoveProduct,
+  } = useAuth();
 
   const memoizedValues = useMemo(
-    () => ({ isAuth, loading, user, handleLogin, handleLogout, handleRegister }),
-    [isAuth, loading, user, handleLogin, handleLogout, handleRegister],
+    () => ({
+      isAuth,
+      loading,
+      user,
+      handleLogin,
+      handleLogout,
+      handleRegister,
+      handleRemoveProduct,
+    }),
+    [
+      isAuth,
+      loading,
+      user,
+      handleLogin,
+      handleLogout,
+      handleRegister,
+      handleRemoveProduct,
+    ],
   );
 
   return (
-    <AuthContext.Provider
-      value={ memoizedValues }
-    >
+    <AuthContext.Provider value={ memoizedValues }>
       {children}
     </AuthContext.Provider>
   );

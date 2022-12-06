@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Tabela from '../ProductAdd';
+import Tabela from '../Tabela';
 
 function TableProducts() {
   const [Total, setTotal] = useState(0);

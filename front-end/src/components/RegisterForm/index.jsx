@@ -7,7 +7,6 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
   const { handleRegister } = useContext(AuthContext);
-  // const history = useHistory();
 
   useEffect(() => {
     const handleDisabled = () => {
@@ -26,9 +25,6 @@ function RegisterForm() {
     handleDisabled();
   }, [email, password, name]);
 
-  // const handleSign = () => {
-  //   history.push('/customer/products');
-  // };
   return (
     <div>
       <div>
