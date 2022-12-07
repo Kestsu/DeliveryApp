@@ -1,0 +1,17 @@
+header, nav, ul, .userMenu {
+  display: flex;
+}
+
+header {
+  justify-content: space-between;
+}
+
+nav, ul, a {
+  gap: 1em;
+  list-style: none;
+  text-decoration: none;
+}
+
+.userMenu {
+  gap: 0.7em;
+}

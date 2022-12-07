@@ -2,6 +2,10 @@ require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
 
+// const secret = require('fs').readFileSync('./back-end/jwt.evaluation.key', {
+//   encoding: 'utf-8',
+// });
+
 const secret = process.env.JWT_SECRET || 'secret_key';
 
 const geraToken = (campos) => {

@@ -1,25 +1,29 @@
 version: '3.9'
 services:
-  node:
-    # Imagem base do container
-    image: node:16
-    # Nome do container para facilitar execução
-    container_name: app_delivery_node
-    # Mesmo que `docker run -t`
-    tty: true
-    # Mesmo que `docker run -i`
-    stdin_open: true
-    # Substitui o comando padrão da imagem do node
-    command: bash
-    # Restarta a imagem caso algo a faça parar
-    restart: always
-    # Diretório padrão de execução
-    working_dir: /app
-    # Lista de volumes (diretórios) mapeados de fora para dentro do container
-    volumes:
-      # Monta o diretório atual, com todos os dados do projeto,
-      # dentro do diretório /app
-      - ./:/app
+  # node:
+  #   # Imagem base do container
+  #   image: node:16
+  #   # Nome do container para facilitar execução
+  #   container_name: app_delivery_node
+  #   # Mesmo que `docker run -t`
+  #   tty: true
+  #   # Mesmo que `docker run -i`
+  #   stdin_open: true
+  #   # Substitui o comando padrão da imagem do node
+  #   command: bash
+  #   # Restarta a imagem caso algo a faça parar
+  #   restart: always
+  #   # Diretório padrão de execução
+  #   working_dir: /app
+  #   # Lista de volumes (diretórios) mapeados de fora para dentro do container
+  #   volumes:
+  #     # Monta o diretório atual, com todos os dados do projeto,
+  #     # dentro do diretório /app
+  #     - ./:/app
+  #   ports:
+  #     - 3001:3001
+  #   networks:
+  #     - app_delivery_net
   db:
     container_name: app_delivery_db
     image: mysql:8.0.21
@@ -31,3 +35,8 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
+#     networks:
+#       - app_delivery_net
+# networks:
+#   app_delivery_net:
+#     driver: bridge
