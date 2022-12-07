@@ -22,11 +22,11 @@ function RegisterForm() {
       if (email.match(isValid) === null) {
         setError('Digite um email válido');
       }
-      if (password.length <= six) {
+      if (password.length < six) {
         setError('Digite uma senha com mais de 6 digitos');
       }
 
-      if (password.length > six
+      if (password.length >= six
         && email.match(isValid)
         && name.length > twenteen) {
         setError('');
