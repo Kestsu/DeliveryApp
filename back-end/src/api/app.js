@@ -4,7 +4,7 @@ const cors = require('cors');
 const errorMiddleware = require('../middleware/errorMiddleware');
 
 const loginRouter = require('../routes/loginRouter');
-const userRouter = require('../routes/userRouter');
+const registerRouter = require('../routes/registerRouter');
 const productsRouter = require('../routes/productsRouter');
 const salesRouter = require('../routes/salesRouter');
 const adminRouter = require('../routes/adminRouter');
@@ -22,7 +22,7 @@ app.use('/images', express.static('public/images'));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use('/login', loginRouter);
-app.use('/user', userRouter);
+app.use('/register', registerRouter);
 
 app.use('/products', productsRouter);
 
