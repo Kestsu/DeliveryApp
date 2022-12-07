@@ -10,7 +10,7 @@ function Tabela(props) {
 
   useEffect(() => {
     setLista(list);
-    console.log(type);
+    // console.log(type);
   }, [list]);
 
   const handleSubTotal = (quantity, price) => {

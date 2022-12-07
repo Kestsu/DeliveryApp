@@ -11,6 +11,7 @@ function OrdersDetails() {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
   const [status, setStatusAtual] = useState('');
+  // const [disabled, setDisabled] = useState(false);
   const [date, setDate] = useState('');
   const { id } = useParams();
 
@@ -18,12 +19,12 @@ function OrdersDetails() {
     (async () => {
       const { data } = await api.get(`/sales/${id}`);
       setOrder(data);
-      setStatusAtual(data.status.toUpperCase());
+      setStatusAtual(data.status);
       setProducts(data.products);
       const saleDate = new Date(data.saleDate);
       const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
       setDate(saleDate.toLocaleDateString('pt-BR', options));
-
+      // if (status === 'ENTREGUE') setDisabled(true);
       setLoading(false);
     })();
   }, [id]);
@@ -31,8 +32,8 @@ function OrdersDetails() {
   const updateStatus = async () => {
     try {
       const response = await api.patch(`/sales/${id}`, { status: 'Entregue' });
-
-      setStatusAtual(response.data.status.toUpperCase());
+      // setDisabled(true);
+      setStatusAtual(response.data.status);
     } catch (error) {
       console.log(error);
     }
@@ -52,14 +53,15 @@ function OrdersDetails() {
           {date}
         </p>
         <p
-          data-testid={ `customer_
-          order_details__element-order-details-label-delivery-status` }
+          data-testid={ 'customer_order_details__'
+           + 'element-order-details-label-delivery-status' }
         >
           {status}
         </p>
         <button
           type="button"
           data-testid="customer_order_details__button-delivery-check"
+          disabled
           onClick={ () => {
             updateStatus();
           } }
