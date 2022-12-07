@@ -1,9 +1,9 @@
 import React from 'react';
-import CustormerOrders from '../../components/CustormerOrders';
+import CustormerOrders from '../../components/Orders';
 
 import Header from '../../components/Header';
 
-function Orders() {
+function OrdersCustomer() {
   return (
     <div>
       <Header />
@@ -12,4 +12,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default OrdersCustomer;

@@ -92,12 +92,13 @@ function CustomerProducts() {
         type="button"
         data-testid="customer_products__button-cart"
         className="checkout-button"
-        disabled={ totalPrice === 0 }
+        disabled={ totalQty === 0 }
         onClick={ clickCheckoutButton }
       >
+        Ver Carrinho:   Valor Total R$:
         <span data-testid="customer_products__checkout-bottom-value">
-          Ver Carrinho:   Valor Total R$:
-          { totalPrice }
+          {console.log('totalPrice', totalPrice)}
+          { totalPrice !== 0 ? totalPrice.replace('.', ',') : totalPrice.toFixed(2)}
         </span>
       </button>
     </div>

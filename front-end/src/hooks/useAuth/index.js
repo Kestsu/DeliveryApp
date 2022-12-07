@@ -13,9 +13,9 @@ const useAuth = () => {
 
   api.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        config.headers.Authorization = `${JSON.parse(token)}`;
+      const userInfo = localStorage.getItem('user');
+      if (userInfo?.token) {
+        config.headers.Authorization = `${JSON.parse(userInfo?.token)}`;
         setIsAuth(true);
       }
       return config;
@@ -40,33 +40,33 @@ const useAuth = () => {
   useEffect(() => {
     setLoading(true);
 
-    const token = JSON.parse(localStorage.getItem('token'));
-    const name = JSON.parse(localStorage.getItem('name'));
-    const role = JSON.parse(localStorage.getItem('role'));
-    const email = JSON.parse(localStorage.getItem('email'));
+    const userInfo = JSON.parse(localStorage.getItem('user'));
 
-    (async () => {
-      if (token && name && role && email) {
-        try {
+    const { token, name, role, email } = userInfo || {};
+
+    (
+      async () => {
+        if (token && name && role && email) {
+          try {
           // verificar se o token é válido
           // await api.get('/customer/products');
-          api.defaults.headers.Authorization = `${token}`;
-          await api.get('/products');
-          setUser({ name, role, email });
-          setIsAuth(true);
-          setLoading(false);
-        } catch (err) {
-          setLoading(false);
-          setUser({});
-          setIsAuth(false);
-          api.defaults.headers.Authorization = undefined;
-          localStorage.clear();
-          console.log(err);
+            api.defaults.headers.Authorization = `${token}`;
+            await api.get('/products');
+            setUser({ name, role, email });
+            setIsAuth(true);
+            setLoading(false);
+          } catch (err) {
+            setLoading(false);
+            setUser({});
+            setIsAuth(false);
+            api.defaults.headers.Authorization = undefined;
+            localStorage.clear();
+            console.log(err);
+          }
         }
-      }
 
-      setLoading(false);
-    })();
+        setLoading(false);
+      })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,23 +76,23 @@ const useAuth = () => {
     try {
       const { data } = await api.post('/login', userData);
 
-      Object.keys(data).forEach((key) => {
-        localStorage.setItem(key, JSON.stringify(data[key]));
-      });
+      localStorage.setItem('user', JSON.stringify(data));
 
-      api.defaults.headers.Authorization = `${data.token}`;
-      setUser(data);
-      setIsAuth(true);
+      if (!data.message) {
+        api.defaults.headers.Authorization = `${data.token}`;
+        setUser(data);
+        setIsAuth(true);
 
-      if (data.role === 'customer') {
-        history.push('/customer/products');
-      } else if (data.role === 'seller') {
-        history.push('/seller/order');
-      } else if (data.role === 'administrator') {
-        history.push('/admin/manage');
+        if (data.role === 'customer') {
+          history.push('/customer/products');
+        } else if (data.role === 'seller') {
+          history.push('/seller/order');
+        } else if (data.role === 'administrator') {
+          history.push('/admin/manage');
+        }
       }
-
       setLoading(false);
+      return 'error';
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -122,29 +122,31 @@ const useAuth = () => {
 
     try {
       const { data } = await api.post('/register', userData);
+      if (!data.message) {
+        localStorage.setItem('user', JSON.stringify(data));
 
-      Object.keys(data).forEach((key) => {
-        localStorage.setItem(key, JSON.stringify(data[key]));
-      });
-
-      api.defaults.headers.Authorization = `${data.token}`;
-      setUser(data.user);
-      setIsAuth(true);
-      history.push('/customer/products');
+        api.defaults.headers.Authorization = `${data.token}`;
+        setUser(data.user);
+        setIsAuth(true);
+        history.push('/customer/products');
+      }
       setLoading(false);
+      return 'Ja existe';
     } catch (err) {
       console.log(err);
       setLoading(false);
     }
   };
 
-  const handleRemoveProduct = async (keyName) => {
+  const handleRemoveProduct = async (id, setProducts) => {
     setLoading(true);
 
     try {
-      storage.removeItem(keyName);
+      const localGetItems = JSON.parse(localStorage.getItem('products'));
+      const newItems = localGetItems.filter((item) => item.id !== id);
+      localStorage.setItem('products', JSON.stringify(newItems));
+      setProducts(newItems);
 
-      // api.defaults.headers.Authorization = `Bearer ${data.token}`;
       setIsAuth(true);
 
       setLoading(false);

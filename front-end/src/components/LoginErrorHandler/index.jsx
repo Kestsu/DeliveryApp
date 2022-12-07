@@ -1,17 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function LoginErrorHandler() {
+function LoginErrorHandler({ message }) {
   return (
     <div>
       <p
         id="error"
-        data-testid="common_register__button-register"
+        data-testid="common_login__element-invalid-email"
       >
-        Elemento oculto- mensagens de erro
+        {message}
 
       </p>
     </div>
   );
 }
+
+LoginErrorHandler.propTypes = {
+  message: PropTypes.string.isRequired,
+};
 
 export default LoginErrorHandler;
