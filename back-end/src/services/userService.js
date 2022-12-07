@@ -1,5 +1,28 @@
+const md5 = require('md5');
+const { geraToken } = require('../utils/tokenGeneration');
 const { User } = require('../database/models');
-const { NotFoundError, UnexpectedError } = require('../errors');
+const { NotFoundError, UnexpectedError, ConflictError } = require('../errors');
+
+const register = async ({ email, password, name }) => {
+  try {
+    const isAlreadyRegistered = await User.findOne({ where: { email } });
+    if (isAlreadyRegistered)
+      throw new ConflictError('Email already registered');
+    const md5password = md5(password);
+    const newUser = await User.create({
+      name,
+      email,
+      password: md5password,
+      role: 'user',
+    });
+    const token = geraToken(newUser);
+    return { status: 201, result: { name, email, role: newUser.role, token } };
+  } catch (error) {
+    if (error.status) throw error;
+
+    throw new UnexpectedError();
+  }
+};
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({
@@ -30,6 +53,7 @@ const getAllSellers = async () => {
 };
 
 module.exports = {
+  register,
   getUserByEmail,
   getAllSellers,
 };
