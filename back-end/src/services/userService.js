@@ -6,8 +6,10 @@ const { NotFoundError, UnexpectedError, ConflictError } = require('../errors');
 const register = async ({ email, password, name }) => {
   try {
     const isAlreadyRegistered = await User.findOne({ where: { email } });
-    if (isAlreadyRegistered)
+    if (isAlreadyRegistered) {
       throw new ConflictError('Email already registered');
+    }
+
     const md5password = md5(password);
     const newUser = await User.create({
       name,
