@@ -86,7 +86,7 @@ const useAuth = () => {
         if (data.role === 'customer') {
           history.push('/customer/products');
         } else if (data.role === 'seller') {
-          history.push('/seller/order');
+          history.push('/seller/orders');
         } else if (data.role === 'administrator') {
           history.push('/admin/manage');
         }
