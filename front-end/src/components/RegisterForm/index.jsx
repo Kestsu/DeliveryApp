@@ -90,6 +90,15 @@ function RegisterForm() {
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
+
+        { error ? (
+          <p
+            data-testid="common_register__element-invalid_register"
+          >
+            Corrija seus dados, Por favor!
+          </p>
+        ) : null }
+
         <br />
         <button
           data-testid="common_register__button-register"
