@@ -23,12 +23,11 @@ function TableProducts({ list, setProducts }) {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
     if (history.location.pathname !== '/customer/checkout') {
       setTypeURL('OrdersDetails');
     }
     handleReflex(list);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
   const removeProduct = (id) => {
     handleRemoveProduct(id, setProducts);

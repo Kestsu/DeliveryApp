@@ -9,6 +9,7 @@ function Tabela(props) {
   useEffect(() => {
     const mult = (Number(quantity) * Number(price)).toFixed(2);
     setSubTotal(mult.replace('.', ','));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -69,12 +70,12 @@ Tabela.propTypes = {
   index: PropTypes.number.isRequired,
   fun: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  products: PropTypes.arrayOf(PropTypes.shape({
+  products: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
-    replace: PropTypes.func.isRequired,
-  })).isRequired,
+    replace: PropTypes.func,
+  }).isRequired,
 };
 
 export default Tabela;
