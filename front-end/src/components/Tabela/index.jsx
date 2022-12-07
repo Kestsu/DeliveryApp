@@ -2,78 +2,196 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Tabela(props) {
-  const { type, fun, index, products } = props;
-  const { name, quantity, price } = products;
-  const [subTotal, setSubTotal] = useState([]);
+  // const { fun, index, products, TypeURL } = props;
+  // const { name, quantity, price } = products;
+  const [lista, setLista] = useState([]);
+  const { list, type, fun, total } = props;
+  // const { name, quantity, price } = list;
 
   useEffect(() => {
-    const mult = (Number(quantity) * Number(price)).toFixed(2);
-    setSubTotal(mult.replace('.', ','));
-  }, [price, quantity]);
+    setLista(list);
+    console.log(type);
+  }, [list]);
 
+  const handleSubTotal = (quantity, price) => {
+    const mult = (Number(quantity) * Number(price)).toFixed(2);
+    return mult.replace('.', ',');
+  };
+
+  if (type === 'checkout') {
+    return (
+      <div>
+        <tbody>
+          {lista?.map(({ name, quantity, price }, index) => (
+            <tr key={ index }>
+
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-item-number-${index}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-name-${index}`
+                }
+              >
+                {name}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-quantity-${index}`
+                }
+              >
+                {quantity}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-unit-price-${index}`
+                }
+              >
+                {`R$${price.replace('.', ',')}`}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-sub-total-${index}`
+                }
+              >
+                {`R$${handleSubTotal(quantity, price)}`}
+              </td>
+
+              <td>
+                <button
+                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                  type="button"
+                  onClick={ () => fun() }
+                >
+                  Remover
+                </button>
+              </td>
+
+            </tr>
+          ))}
+        </tbody>
+        <div data-testid="customer_checkout__element-order-total-price">
+          {`Total: R$${total.toFixed(2).replace('.', ',')}`}
+        </div>
+      </div>
+    );
+  }
+  if (type === 'ordersDetails') {
+    return (
+      <div>
+        <tbody>
+          {lista?.map(({ name, quantity, price }, index) => (
+
+            <tr key={ index }>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-item-number-${index}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-name-${index}`
+                }
+              >
+                {name}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-quantity-${index}`
+                }
+              >
+                {quantity}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-unit-price-${index}`
+                }
+              >
+                {`R$${price.replace('.', ',')}`}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-sub-total-${index}`
+                }
+              >
+                {`R$${handleSubTotal(quantity, price)}`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <div data-testid="customer_order_details__element-order-total-price">
+          {`Total: R$${total.toFixed(2).replace('.', ',')}`}
+        </div>
+      </div>
+    );
+  }
   return (
-    <tr>
-      <td
-        data-testid={ `customer_checkout__element-order-table-item-number-${
-          index + 1
-        }` }
-      >
-        {index + 1}
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-name-${
-          index + 1
-        }` }
-      >
-        {name}
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-quantity-${
-          index + 1
-        }` }
-      >
-        {quantity}
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-unit-price-${
-          index + 1
-        }` }
-      >
-        {`R$${price.replace('.', ',')}`}
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-sub-total-${
-          index + 1
-        }` }
-      >
-        {`R$${subTotal}`}
-      </td>
-      {(type === 'checkout') ? (
-        <td>
-          <button
-            data-testid={ `customer_checkout__element-order-table-remove-${
-              index + 1
-            }` }
-            type="button"
-            onClick={ () => fun() }
-          >
-            Remover
-          </button>
-        </td>
-      ) : ''}
-    </tr>
+    <div>
+      <div>
+        <tbody>
+
+          {lista?.map(({ name, quantity, price }, index) => (
+            <tr key={ index }>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-item-number-${index}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-name-${index}`
+                }
+              >
+                {name}
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-quantity-${index}`
+                }
+              >
+                {quantity}
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-unit-price-${index}`
+                }
+              >
+                {`R$${price.replace('.', ',')}`}
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-sub-total-${index}`
+                }
+              >
+                {`R$${handleSubTotal(quantity, price)}`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </div>
+      <div data-testid="seller_order_details__element-order-total-price">
+        {`Total: R$${total.toFixed(2).replace('.', ',')}`}
+      </div>
+    </div>
   );
 }
 
 Tabela.propTypes = {
-  index: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
   fun: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  products: PropTypes.shape({
+  list: PropTypes.arrayOf({
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
-    replace: PropTypes.func,
   }).isRequired,
 };
 

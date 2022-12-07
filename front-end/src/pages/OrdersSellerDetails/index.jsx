@@ -5,6 +5,8 @@ import TableProducts from '../../components/TableProducts';
 import api from '../../helpers/api';
 import '../../index.css';
 
+const quatro = 4;
+
 function OrdersSellerDetails() {
   const [products, setProducts] = useState([]);
   const [day, setDay] = useState([]);
@@ -50,7 +52,7 @@ function OrdersSellerDetails() {
           <h3
             data-testid="seller_order_details__element-order-details-label-order-id"
           >
-            {`PEDIDO ${database.id}`}
+            {`PEDIDO ${`${database?.id}`?.padStart(quatro, '0')}`}
 
           </h3>
           <h3

@@ -7,6 +7,8 @@ import LoginErrorHandler from '../LoginErrorHandler';
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('fulana@deliveryapp.com');
+  // const [password, setPassword] = useState('fulana@123');
   // const [email, setEmail] = useState('zebirita@email.com');
   // const [password, setPassword] = useState('$#zebirita#$');
   const [disabled, setDisabled] = useState(true);
