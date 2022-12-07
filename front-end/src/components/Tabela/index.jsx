@@ -74,8 +74,9 @@ function Tabela(props) {
             </tr>
           ))}
         </tbody>
+        <span>Total: R$</span>
         <div data-testid="customer_checkout__element-order-total-price">
-          {`Total: R$${total.toFixed(2).replace('.', ',')}`}
+          {`${total.toFixed(2).replace('.', ',')}`}
         </div>
       </div>
     );
@@ -125,8 +126,9 @@ function Tabela(props) {
             </tr>
           ))}
         </tbody>
+        <span>Total: R$</span>
         <div data-testid="customer_order_details__element-order-total-price">
-          {`Total: R$${total.toFixed(2).replace('.', ',')}`}
+          {`${total.toFixed(2).replace('.', ',')}`}
         </div>
       </div>
     );
@@ -177,8 +179,9 @@ function Tabela(props) {
           ))}
         </tbody>
       </div>
+      <span>Total: R$</span>
       <div data-testid="seller_order_details__element-order-total-price">
-        {`Total: R$${total.toFixed(2).replace('.', ',')}`}
+        {`${total.toFixed(2).replace('.', ',')}`}
       </div>
     </div>
   );
