@@ -22,11 +22,11 @@ function RegisterForm() {
       if (email.match(isValid) === null) {
         setError('Digite um email válido');
       }
-      if (password.length <= six) {
+      if (password.length < six) {
         setError('Digite uma senha com mais de 6 digitos');
       }
 
-      if (password.length > six
+      if (password.length >= six
         && email.match(isValid)
         && name.length > twenteen) {
         setError('');
@@ -90,6 +90,15 @@ function RegisterForm() {
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
+
+        { error ? (
+          <p
+            data-testid="common_register__element-invalid_register"
+          >
+            Corrija seus dados, Por favor!
+          </p>
+        ) : null }
+
         <br />
         <button
           data-testid="common_register__button-register"
