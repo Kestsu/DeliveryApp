@@ -9,8 +9,7 @@ function Tabela(props) {
   useEffect(() => {
     const mult = (Number(quantity) * Number(price)).toFixed(2);
     setSubTotal(mult.replace('.', ','));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [price, quantity]);
 
   return (
     <tr>

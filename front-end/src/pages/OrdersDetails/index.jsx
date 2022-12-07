@@ -26,7 +26,7 @@ function OrdersDetails() {
 
       setLoading(false);
     })();
-  }, []);
+  }, [id]);
 
   const updateStatus = async () => {
     try {

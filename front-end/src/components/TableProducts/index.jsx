@@ -27,8 +27,7 @@ function TableProducts({ list, setProducts }) {
       setTypeURL('OrdersDetails');
     }
     handleReflex(list);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [list]);
+  }, [list, history.location.pathname]);
   const removeProduct = (id) => {
     handleRemoveProduct(id, setProducts);
 

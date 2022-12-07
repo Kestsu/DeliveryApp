@@ -6,6 +6,10 @@ const userService = require('../services/userService');
 
 const secret = process.env.JWT_SECRET || 'secret_key';
 
+// const secret = require('fs').readFileSync('./back-end/jwt.evaluation.key', {
+  // encoding: 'utf-8',
+// });
+
 module.exports = async (req, res, next) => {
   const token = req.header('Authorization');
 

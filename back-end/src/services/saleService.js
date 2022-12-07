@@ -51,21 +51,23 @@ const formatProductQuantity = (product) => {
   return formatted;
 };
 
+const includeConditions = [
+  {
+    model: User,
+    as: 'seller',
+    attributes: { exclude: ['password'] },
+  },
+  {
+    model: Product,
+    as: 'products',
+  },
+]
+
 const getSaleById = async (id, user) => {
   try {
     const { dataValues: sale } = await Sale.findOne({
       where: { id },
-      include: [
-        {
-          model: User,
-          as: 'seller',
-          attributes: { exclude: ['password'] },
-        },
-        {
-          model: Product,
-          as: 'products',
-        },
-      ],
+      include: includeConditions,
     });
 
     if (!sale) throw new NotFoundError(`Produto de id: ${id} não encontrado`);
