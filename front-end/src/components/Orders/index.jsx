@@ -104,7 +104,7 @@ function Orders() {
             key={ item.deliveryAddress }
             data-testid={ `seller_orders__element-card-address-${item.id}` }
           >
-            {`Rua ${item.deliveryAddress}, Bairro ... , ${item.deliveryNumber}`}
+            {`Rua ${item.deliveryAddress}, ${item.deliveryNumber}`}
           </p>
         </div>
       ))}

@@ -38,6 +38,7 @@ function TableProducts({ list, setProducts }) {
 
     handleReflex(list);
   }, [list, history.location.pathname]);
+
   const removeProduct = (id) => {
     handleRemoveProduct(id, setProducts);
 
@@ -71,7 +72,7 @@ function TableProducts({ list, setProducts }) {
           } */}
           <Tabela
             list={ list }
-            fun={ () => removeProduct(item.id) }
+            fun={ removeProduct }
             type={ TypeURL }
             total={ Total }
           />

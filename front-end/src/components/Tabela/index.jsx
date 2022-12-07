@@ -22,7 +22,7 @@ function Tabela(props) {
     return (
       <div>
         <tbody>
-          {lista?.map(({ name, quantity, price }, index) => (
+          {lista?.map(({ id, name, quantity, price }, index) => (
             <tr key={ index }>
 
               <td
@@ -65,7 +65,7 @@ function Tabela(props) {
                 <button
                   data-testid={ `customer_checkout__element-order-table-remove-${index}` }
                   type="button"
-                  onClick={ () => fun() }
+                  onClick={ () => fun(id) }
                 >
                   Remover
                 </button>
