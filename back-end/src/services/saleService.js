@@ -61,7 +61,7 @@ const includeConditions = [
     model: Product,
     as: 'products',
   },
-]
+];
 
 const getSaleById = async (id, user) => {
   try {
