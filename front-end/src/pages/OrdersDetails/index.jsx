@@ -11,7 +11,7 @@ function OrdersDetails() {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
   const [status, setStatusAtual] = useState('');
-  // const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [date, setDate] = useState('');
   const { id } = useParams();
 
@@ -24,15 +24,15 @@ function OrdersDetails() {
       const saleDate = new Date(data.saleDate);
       const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
       setDate(saleDate.toLocaleDateString('pt-BR', options));
-      // if (status === 'ENTREGUE') setDisabled(true);
+      if (status === 'Em Trânsito') setDisabled(false);
       setLoading(false);
     })();
-  }, [id]);
+  }, [id, status]);
 
   const updateStatus = async () => {
     try {
       const response = await api.patch(`/sales/${id}`, { status: 'Entregue' });
-      // setDisabled(true);
+      setDisabled(true);
       setStatusAtual(response.data.status);
     } catch (error) {
       console.log(error);
@@ -61,7 +61,7 @@ function OrdersDetails() {
         <button
           type="button"
           data-testid="customer_order_details__button-delivery-check"
-          disabled
+          disabled={ disabled }
           onClick={ () => {
             updateStatus();
           } }

@@ -30,6 +30,12 @@ function Orders() {
     if (user.role === 'seller') history.push(`/seller/orders/${id}`);
   };
 
+  const alterarFormatoData = (data) => {
+    const date = new Date(data);
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return date.toLocaleDateString('pt-BR', options);
+  };
+
   return user.role === 'customer' ? (
     <div>
       {orders.map((item) => (
@@ -54,7 +60,7 @@ function Orders() {
             key={ item.saleDate }
             data-testid={ `customer_orders__element-order-date-${item.id}` }
           >
-            {item.saleDate}
+            {alterarFormatoData(item.saleDate)}
           </p>
 
           <p
@@ -83,7 +89,6 @@ function Orders() {
 
             <p
               key={ item.status }
-              // onClick={ () => orderDetails(item.id) }
               data-testid={ `seller_orders__element-delivery-status-${item.id}` }
             >
               {item.status}
@@ -93,7 +98,7 @@ function Orders() {
               key={ item.saleDate }
               data-testid={ `seller_orders__element-order-date-${item.id}` }
             >
-              {item.saleDate}
+              {alterarFormatoData(item.saleDate)}
             </p>
 
             <p
