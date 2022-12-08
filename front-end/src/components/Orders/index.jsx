@@ -27,7 +27,7 @@ function Orders() {
       history.push(`/customer/orders/${id}`);
     }
 
-    if (user.role === 'seller') history.push(`/seller/order/${id}`);
+    if (user.role === 'seller') history.push(`/seller/orders/${id}`);
   };
 
   return user.role === 'customer' ? (
@@ -70,42 +70,46 @@ function Orders() {
     <div>
       {orders.map((item) => (
         <div key={ item.id }>
-          <p
-            key={ item.id }
-            data-testid={ `seller_orders__element-order-id-${item.id}` }
-          >
-            {`PEDIDO ${`${item?.id}`?.padStart(quatro, '0')}`}
-          </p>
-
-          <button
-            key={ item.status }
-            type="button"
+          <card
             onClick={ () => orderDetails(item.id) }
-            data-testid={ `seller_orders__element-delivery-status-${item.id}` }
           >
-            {item.status}
-          </button>
 
-          <p
-            key={ item.saleDate }
-            data-testid={ `seller_orders__element-order-date-${item.id}` }
-          >
-            {item.saleDate}
-          </p>
+            <p
+              key={ item.id }
+              data-testid={ `seller_orders__element-order-id-${item.id}` }
+            >
+              {`PEDIDO ${`${item?.id}`?.padStart(quatro, '0')}`}
+            </p>
 
-          <p
-            key={ item.totalPrice }
-            data-testid={ `seller_orders__element-card-price-${item.id}` }
-          >
-            {item.totalPrice}
-          </p>
+            <p
+              key={ item.status }
+              // onClick={ () => orderDetails(item.id) }
+              data-testid={ `seller_orders__element-delivery-status-${item.id}` }
+            >
+              {item.status}
+            </p>
 
-          <p
-            key={ item.deliveryAddress }
-            data-testid={ `seller_orders__element-card-address-${item.id}` }
-          >
-            {`Rua ${item.deliveryAddress}, ${item.deliveryNumber}`}
-          </p>
+            <p
+              key={ item.saleDate }
+              data-testid={ `seller_orders__element-order-date-${item.id}` }
+            >
+              {item.saleDate}
+            </p>
+
+            <p
+              key={ item.totalPrice }
+              data-testid={ `seller_orders__element-card-price-${item.id}` }
+            >
+              {item.totalPrice}
+            </p>
+
+            <p
+              key={ item.deliveryAddress }
+              data-testid={ `seller_orders__element-card-address-${item.id}` }
+            >
+              {`Rua ${item.deliveryAddress}, ${item.deliveryNumber}`}
+            </p>
+          </card>
         </div>
       ))}
     </div>

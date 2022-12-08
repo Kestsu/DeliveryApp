@@ -6,6 +6,7 @@ import api from '../../helpers/api';
 import '../../index.css';
 
 const quatro = 4;
+const preparar = 'Em Trânsito';
 
 function OrdersSellerDetails() {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,8 @@ function OrdersSellerDetails() {
   const [database, setDatabase] = useState([]);
   const [statusAtual, setStatusAtual] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [disabledPreparing, setDisabledPreparing] = useState(true);
+  const [disabledDispatch, setDisabledDispatch] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -21,21 +24,41 @@ function OrdersSellerDetails() {
         const { data } = await api.get(`/sales/${id}`);
         setDatabase(data);
         setProducts(data.products);
-        setStatusAtual(data.status.toUpperCase());
+        setStatusAtual(data.status);
         const date = new Date(data.saleDate);
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         setDay(date.toLocaleDateString('pt-BR', options));
+        if (statusAtual === 'Pendente') {
+          setDisabledPreparing(false);
+          setDisabledDispatch(true);
+        }
+        if (statusAtual === 'Preparando') {
+          setDisabledPreparing(true);
+          setDisabledDispatch(false);
+        }
+        if (statusAtual === preparar) {
+          setDisabledPreparing(true);
+          setDisabledDispatch(true);
+        }
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [id]);
+  }, [id, statusAtual]);
 
   const updateStatus = async (newStatus) => {
     try {
       const response = await api.patch(`/sales/${id}`, { status: newStatus });
       setStatusAtual(response.data.status);
+      if (statusAtual === 'Preparando') {
+        setDisabledPreparing(true);
+        setDisabledDispatch(false);
+      }
+      if (statusAtual === preparar) {
+        setDisabledPreparing(true);
+        setDisabledDispatch(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -62,8 +85,8 @@ function OrdersSellerDetails() {
 
           </h3>
           <h3
-            data-testid={ `seller_order_details
-            __element-order-details-label-delivery-status` }
+            data-testid={ 'seller_order_details__'
+            + 'element-order-details-label-delivery-status' }
           >
             {statusAtual}
 
@@ -71,6 +94,7 @@ function OrdersSellerDetails() {
           <button
             className="fundo"
             type="button"
+            disabled={ disabledPreparing }
             data-testid="seller_order_details__button-preparing-check"
             onClick={ () => updateStatus('Preparando') }
           >
@@ -80,8 +104,9 @@ function OrdersSellerDetails() {
           <button
             className="fundoRosa"
             type="button"
-            data-testid="seller_order_details__button-preparing-check"
-            onClick={ () => updateStatus('Em Trânsito') }
+            disabled={ disabledDispatch }
+            data-testid="seller_order_details__button-dispatch-check"
+            onClick={ () => updateStatus(preparar) }
           >
             SAIU PARA ENTREGA
 
