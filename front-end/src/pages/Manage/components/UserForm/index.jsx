@@ -8,31 +8,44 @@ function UserForm({ usersList, setUsersList }) {
     { name: '', email: '', password: '', role: 'vendedor' },
   );
   const [isValid, setIsValid] = useState(true);
+  const [isDesabled, setIsDesabled] = useState(true);
+
+  // const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  // const six = 6;
+  // const twenteen = 12;
+
+  // if (inputValues.password.length > six
+  //     && inputValues.email.match(valid)
+  //     && inputValues.name.length > twenteen
+  // ) {
+  //   setIsDesabled(false);
+  // } else {
+  //   setIsDesabled(true);
+  // }
 
   const createNewUser = async () => {
-    const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    const six = 6;
-    const twenteen = 12;
-
-    if (inputValues.password.length > six
-      && inputValues.email.match(valid)
-      && inputValues.name.length > twenteen
-    ) {
-      try {
-        const { data } = await api.post('/users', inputValues);
-        setIsValid(true);
-        const newUsersList = [...usersList, data];
-        setUsersList(newUsersList);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
+    try {
+      const { data } = await api.post('/users', inputValues);
+      setIsValid(true);
+      const newUsersList = [...usersList, data];
+      setUsersList(newUsersList);
+    } catch (error) {
       setIsValid(false);
     }
   };
 
   useEffect(() => {
+    const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const six = 6;
+    const twenteen = 12;
 
+    if (inputValues.password.length >= six
+      && inputValues.email.match(valid)
+      && inputValues.name.length > twenteen) {
+      setIsDesabled(false);
+    } else {
+      setIsDesabled(true);
+    }
   }, [inputValues]);
 
   return (
@@ -41,7 +54,11 @@ function UserForm({ usersList, setUsersList }) {
 
       {
         !isValid && (
-          <p>Campos inválidos</p>
+          <p
+            data-testid="admin_manage__element-invalid-register"
+          >
+            Campos inválidos
+          </p>
         )
       }
 
@@ -50,7 +67,7 @@ function UserForm({ usersList, setUsersList }) {
         <input
           type="text"
           id="name"
-          data-testid="common_register__input-name"
+          data-testid="admin_manage__input-name"
           value={ inputValues.name }
           onChange={ ({ target }) => setInputValues(
             { ...inputValues, name: target.value },
@@ -61,7 +78,7 @@ function UserForm({ usersList, setUsersList }) {
         <input
           type="text"
           id="email"
-          data-testid="common_register__input-email"
+          data-testid="admin_manage__input-email"
           value={ inputValues.email }
           onChange={ ({ target }) => setInputValues(
             { ...inputValues, email: target.value },
@@ -72,7 +89,7 @@ function UserForm({ usersList, setUsersList }) {
         <input
           type="password"
           id="password"
-          data-testid="common_register__input-password"
+          data-testid="admin_manage__input-password"
           value={ inputValues.password }
           onChange={ ({ target }) => setInputValues(
             { ...inputValues, password: target.value },
@@ -82,7 +99,7 @@ function UserForm({ usersList, setUsersList }) {
         Role:
         <select
           id="role"
-          data-testid="common_register__input-role"
+          data-testid="admin_manage__select-role"
           value={ inputValues.role }
           onChange={ ({ target }) => setInputValues(
             { ...inputValues, role: target.value },
@@ -95,8 +112,9 @@ function UserForm({ usersList, setUsersList }) {
 
         <button
           type="button"
-          data-testid="common_register__button-register"
+          data-testid="admin_manage__button-register"
           onClick={ () => createNewUser() }
+          disabled={ isDesabled }
         >
           Cadastrar
         </button>
