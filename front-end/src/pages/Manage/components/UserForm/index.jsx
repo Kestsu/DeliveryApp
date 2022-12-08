@@ -8,20 +8,7 @@ function UserForm({ usersList, setUsersList }) {
     { name: '', email: '', password: '', role: 'vendedor' },
   );
   const [isValid, setIsValid] = useState(true);
-  const [isDesabled, setIsDesabled] = useState(true);
-
-  // const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  // const six = 6;
-  // const twenteen = 12;
-
-  // if (inputValues.password.length > six
-  //     && inputValues.email.match(valid)
-  //     && inputValues.name.length > twenteen
-  // ) {
-  //   setIsDesabled(false);
-  // } else {
-  //   setIsDesabled(true);
-  // }
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const createNewUser = async () => {
     try {
@@ -42,9 +29,9 @@ function UserForm({ usersList, setUsersList }) {
     if (inputValues.password.length >= six
       && inputValues.email.match(valid)
       && inputValues.name.length > twenteen) {
-      setIsDesabled(false);
+      setIsDisabled(false);
     } else {
-      setIsDesabled(true);
+      setIsDisabled(true);
     }
   }, [inputValues]);
 
@@ -114,7 +101,7 @@ function UserForm({ usersList, setUsersList }) {
           type="button"
           data-testid="admin_manage__button-register"
           onClick={ () => createNewUser() }
-          disabled={ isDesabled }
+          disabled={ isDisabled }
         >
           Cadastrar
         </button>
