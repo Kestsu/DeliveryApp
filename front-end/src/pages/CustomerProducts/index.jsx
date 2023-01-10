@@ -60,7 +60,7 @@ function CustomerProducts() {
   };
 
   return (
-    <div className="products-body">
+    <div className="products-body test">
       <Header />
       <p>CustomerProducts</p>
       <p>{`Quantidade total: ${totalQty}`}</p>
@@ -101,6 +101,13 @@ function CustomerProducts() {
           { totalPrice !== 0 ? totalPrice.replace('.', ',') : totalPrice.toFixed(2)}
         </span>
       </button>
+      <style jsx>
+        {`
+          .test {
+            color: red
+          }
+        `}
+      </style>
     </div>
   );
 }

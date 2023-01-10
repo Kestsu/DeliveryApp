@@ -5,6 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
 
+const JSXStyle = require('styled-jsx/style').default;
+
+if (typeof global !== 'undefined') {
+  Object.assign(global, { _JSXStyle: JSXStyle });
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
