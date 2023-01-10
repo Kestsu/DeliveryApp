@@ -7,7 +7,7 @@ import './styles.css';
 
 const sumReduce = (total, item) => {
   if (item.quantity) {
-    return total + (Number(item.price) * item.quantity);
+    return total + Number(item.price) * item.quantity;
   }
   return total;
 };
@@ -28,28 +28,26 @@ function CustomerProducts() {
     const storagedProducts = JSON.parse(localStorage.getItem('products'));
 
     try {
-      (
-        async () => {
-          const { data } = await api.get('/products');
-          let qty = 0;
+      (async () => {
+        const { data } = await api.get('/products');
+        let qty = 0;
 
-          if (storagedProducts?.length > 0) {
-            storagedProducts.forEach((productStoraged) => {
-              data.forEach((product, index) => {
-                if (product.id === productStoraged.id) {
-                  qty += Number(productStoraged.quantity);
-                  data[index].quantity = productStoraged.quantity;
-                }
-              });
+        if (storagedProducts?.length > 0) {
+          storagedProducts.forEach((productStoraged) => {
+            data.forEach((product, index) => {
+              if (product.id === productStoraged.id) {
+                qty += Number(productStoraged.quantity);
+                data[index].quantity = productStoraged.quantity;
+              }
             });
-          }
-
-          setTotalQty(Number(qty));
-          setListProducts(data);
-          setLoading(false);
-          sumTotal(data, setTotalPrice);
+          });
         }
-      )();
+
+        setTotalQty(Number(qty));
+        setListProducts(data);
+        setLoading(false);
+        sumTotal(data, setTotalPrice);
+      })();
     } catch (error) {
       console.log(error);
     }
@@ -62,13 +60,10 @@ function CustomerProducts() {
   return (
     <div className="products-body test">
       <Header />
-      <p>CustomerProducts</p>
       <p>{`Quantidade total: ${totalQty}`}</p>
-      <div
-        className="products-container"
-      >
-        {
-          !loading && listProducts.map((product, index) => (
+      <div className="products-container">
+        {!loading
+          && listProducts.map((product, index) => (
             <ProductCard
               key={ product.id }
               id={ product.id }
@@ -84,9 +79,7 @@ function CustomerProducts() {
               sumTotal={ sumTotal }
               setTotalPrice={ setTotalPrice }
             />
-          ))
-        }
-
+          ))}
       </div>
       <button
         type="button"
@@ -95,16 +88,33 @@ function CustomerProducts() {
         disabled={ totalQty === 0 }
         onClick={ clickCheckoutButton }
       >
-        Ver Carrinho:   Valor Total R$:
+        Ver Carrinho: Valor Total R$:
         <span data-testid="customer_products__checkout-bottom-value">
           {console.log('totalPrice', totalPrice)}
-          { totalPrice !== 0 ? totalPrice.replace('.', ',') : totalPrice.toFixed(2)}
+          {totalPrice !== 0
+            ? totalPrice.replace('.', ',')
+            : totalPrice.toFixed(2)}
         </span>
       </button>
       <style jsx>
         {`
-          .test {
-            color: red
+          .products-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1em;
+            padding: 1rem;
+          }
+
+          @media (max-width: 720px) {
+            .products-container {
+            grid-template-columns: repeat(3, 1fr);
+            }
+          }
+
+          @media (max-width: 540px) {
+            .products-container {
+              grid-template-columns: 1fr
+            }
           }
         `}
       </style>

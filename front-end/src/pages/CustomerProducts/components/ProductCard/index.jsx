@@ -2,9 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-function ProductCard({ id, name,
-  price, urlImage, quantity, listProducts, setListProducts,
-  totalQty, setTotalQty, index, sumTotal, setTotalPrice,
+function ProductCard({
+  id,
+  name,
+  price,
+  urlImage,
+  quantity,
+  listProducts,
+  setListProducts,
+  totalQty,
+  setTotalQty,
+  index,
+  sumTotal,
+  setTotalPrice,
 }) {
   const updateLocalStorage = (newListProducts) => {
     localStorage.setItem(
@@ -25,7 +35,13 @@ function ProductCard({ id, name,
   };
 
   const removeProduct = () => {
-    const removedProduct = { id, name, price, urlImage, quantity: quantity - 1 };
+    const removedProduct = {
+      id,
+      name,
+      price,
+      urlImage,
+      quantity: quantity - 1,
+    };
 
     listProducts[index] = removedProduct;
 
@@ -36,7 +52,13 @@ function ProductCard({ id, name,
   };
 
   const inputQuantity = (value) => {
-    const updatedProduct = { id, name, price, urlImage, quantity: Number(value) };
+    const updatedProduct = {
+      id,
+      name,
+      price,
+      urlImage,
+      quantity: Number(value),
+    };
 
     listProducts[index] = updatedProduct;
 
@@ -48,10 +70,8 @@ function ProductCard({ id, name,
 
   return (
     <div className="product-card">
-      <p
-        data-testid={ `customer_products__element-card-price-${id}` }
-      >
-        { price.replace('.', ',') }
+      <p data-testid={ `customer_products__element-card-price-${id}` }>
+        {price.replace('.', ',')}
       </p>
       <img
         className="product-card-img"
@@ -59,16 +79,10 @@ function ProductCard({ id, name,
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
-      <p
-        data-testid={ `customer_products__element-card-title-${id}` }
-      >
-        {name }
-      </p>
-      <div className="quantities">
+      <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
+      <div className="amount">
         <button
-          data-testid={
-            `customer_products__button-card-rm-item-${id}`
-          }
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
           onClick={ () => removeProduct() }
           disabled={ quantity === 0 }
@@ -79,19 +93,38 @@ function ProductCard({ id, name,
           data-testid={ `customer_products__input-card-quantity-${id}` }
           value={ Number(quantity) }
           onChange={ ({ target }) => inputQuantity(target.value) }
-          className="add-rem-buttons label-quantity"
           size={ 1 }
         />
         <button
-          data-testid={
-            `customer_products__button-card-add-item-${id}`
-          }
+          data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
           onClick={ () => addProduct() }
         >
           +
         </button>
       </div>
+      <style jsx>
+        {`
+          .product-card {
+            align-items: center;
+            // border: 1px solid green;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 0.5em;
+          }
+
+          .product-card-img {
+            height: 200px;
+          }
+
+          .amount {
+            display: flex;
+            justify-content: space-between;
+          }
+        `}
+      </style>
     </div>
   );
 }
@@ -102,12 +135,14 @@ ProductCard.propTypes = {
   price: PropTypes.string.isRequired,
   urlImage: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
-  listProducts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    urlImage: PropTypes.string.isRequired,
-    quantity: PropTypes.number,
-  })).isRequired,
+  listProducts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      urlImage: PropTypes.string.isRequired,
+      quantity: PropTypes.number,
+    }),
+  ).isRequired,
   setListProducts: PropTypes.func.isRequired,
   totalQty: PropTypes.number.isRequired,
   setTotalQty: PropTypes.func.isRequired,
