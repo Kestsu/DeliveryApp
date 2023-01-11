@@ -6,7 +6,7 @@ const { NotFoundError, UnexpectedError, ConflictError } = require('../errors');
 const register = async ({ email, password, name }) => {
   try {
     const isAlreadyRegistered = await User.findOne({ where: { email } });
-    
+
     if (isAlreadyRegistered) {
       throw new ConflictError('Email already registered');
     }
@@ -16,7 +16,7 @@ const register = async ({ email, password, name }) => {
       name,
       email,
       password: md5password,
-      role: 'user',
+      role: 'customer',
     });
     const token = geraToken(newUser);
     return { status: 201, result: { name, email, role: newUser.role, token } };
