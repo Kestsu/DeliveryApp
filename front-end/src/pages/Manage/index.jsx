@@ -22,8 +22,10 @@ function Manage() {
   return (
     <>
       <Header />
-      <UserForm usersList={ usersList } setUsersList={ setUsersList } />
-      <UsersTable usersList={ usersList } setUsersList={ setUsersList } />
+      <div className="page-container">
+        <UserForm usersList={ usersList } setUsersList={ setUsersList } />
+        <UsersTable usersList={ usersList } setUsersList={ setUsersList } />
+      </div>
     </>
   );
 }

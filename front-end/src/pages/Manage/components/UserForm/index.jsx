@@ -49,62 +49,119 @@ function UserForm({ usersList, setUsersList }) {
       }
 
       <div className="form">
-        Nome:
-        <input
-          type="text"
-          id="name"
-          data-testid="admin_manage__input-name"
-          value={ inputValues.name }
-          onChange={ ({ target }) => setInputValues(
-            { ...inputValues, name: target.value },
-          ) }
-        />
+        <div>
+          Nome:
+          <input
+            type="text"
+            id="name"
+            data-testid="admin_manage__input-name"
+            value={ inputValues.name }
+            onChange={ ({ target }) => setInputValues(
+              { ...inputValues, name: target.value },
+            ) }
+          />
+        </div>
 
-        E-mail:
-        <input
-          type="text"
-          id="email"
-          data-testid="admin_manage__input-email"
-          value={ inputValues.email }
-          onChange={ ({ target }) => setInputValues(
-            { ...inputValues, email: target.value },
-          ) }
-        />
+        <div>
+          E-mail:
+          <input
+            type="text"
+            id="email"
+            data-testid="admin_manage__input-email"
+            value={ inputValues.email }
+            onChange={ ({ target }) => setInputValues(
+              { ...inputValues, email: target.value },
+            ) }
+          />
+        </div>
 
-        Senha:
-        <input
-          type="password"
-          id="password"
-          data-testid="admin_manage__input-password"
-          value={ inputValues.password }
-          onChange={ ({ target }) => setInputValues(
-            { ...inputValues, password: target.value },
-          ) }
-        />
+        <div>
+          Senha:
+          <input
+            type="password"
+            id="password"
+            data-testid="admin_manage__input-password"
+            value={ inputValues.password }
+            onChange={ ({ target }) => setInputValues(
+              { ...inputValues, password: target.value },
+            ) }
+          />
+        </div>
 
-        Role:
-        <select
-          id="role"
-          data-testid="admin_manage__select-role"
-          value={ inputValues.role }
-          onChange={ ({ target }) => setInputValues(
-            { ...inputValues, role: target.value },
-          ) }
-        >
-          <option value="seller">Vendedor</option>
-          <option value="administrator">Administrador</option>
-          <option value="customer">Cliente</option>
-        </select>
+        <div>
+          Role:
+          <select
+            id="role"
+            data-testid="admin_manage__select-role"
+            value={ inputValues.role }
+            onChange={ ({ target }) => setInputValues(
+              { ...inputValues, role: target.value },
+            ) }
+          >
+            <option value="seller">Vendedor</option>
+            <option value="administrator">Administrador</option>
+            <option value="customer">Cliente</option>
+          </select>
+        </div>
 
         <button
           type="button"
           data-testid="admin_manage__button-register"
           onClick={ () => createNewUser() }
           disabled={ isDisabled }
+          className="submit-btn"
         >
           Cadastrar
         </button>
       </div>
+      <style jsx>
+        {`
+          h3 {
+            margin-bottom: 0.5rem;
+          }
+
+          .form {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: space-between;
+          }
+
+          .form > div {
+            display: grid;
+            gap: 0.25rem;
+            grid-template-columns: 2fr 8fr;
+            align-items: center;
+          }
+
+          input, select {
+            padding: 0.25rem;
+          }
+
+          .submit-btn {
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+          }
+
+          .delivery-check-btn:disabled {
+            opacity: 40%;
+          }
+
+          @media (max-width: 720px) {
+            .form {
+              flex-direction: column;
+            }
+          }
+
+          @media (max-width: 540px) {
+          }
+        `}
+
+      </style>
     </div>
   );
 }
