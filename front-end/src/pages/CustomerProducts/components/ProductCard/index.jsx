@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
 function ProductCard({
   id,
@@ -69,9 +70,6 @@ function ProductCard({
 
   return (
     <div className="product-card">
-      <p data-testid={ `customer_products__element-card-price-${id}` }>
-        {price.replace('.', ',')}
-      </p>
       <img
         className="product-card-img"
         src={ urlImage }
@@ -79,14 +77,20 @@ function ProductCard({
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
       <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
+      <p className="price" data-testid={ `customer_products__element-card-price-${id}` }>
+        R$
+        {' '}
+        {price.replace('.', ',')}
+      </p>
       <div className="amount">
         <button
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
           onClick={ () => removeProduct() }
           disabled={ quantity === 0 }
+          className="interaction-btn"
         >
-          -
+          <IoRemoveCircle />
         </button>
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
@@ -98,29 +102,56 @@ function ProductCard({
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
           onClick={ () => addProduct() }
+          className="interaction-btn"
         >
-          +
+          <IoAddCircle />
         </button>
       </div>
       <style jsx>
         {`
           .product-card {
             align-items: center;
-            // border: 1px solid green;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
             padding: 0.5em;
+            gap: 0.5rem;
           }
 
           .product-card-img {
             height: 200px;
           }
 
+          .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+          }
+
           .amount {
             display: flex;
             justify-content: space-between;
+          }
+
+          .interaction-btn {
+            font-size: 3rem;
+            background: none;
+            border: none;
+            display: flex;
+            color: var(--primary-color);
+          }
+
+          .interaction-btn:disabled {
+            opacity: 40%;
+          }
+
+          input {
+            border: none;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 2rem;
           }
         `}
       </style>
