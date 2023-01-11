@@ -44,14 +44,11 @@ function RegisterForm() {
   };
 
   return (
-    <div>
-      <div>
-        <p>Cadastro</p>
-      </div>
+    <div className="container">
+      <h1>Cadastro</h1>
       <div className="register-container">
         <label className="label-name" htmlFor="name">
           Nome
-          <br />
           <input
             id="name"
             data-testid="common_register__input-name"
@@ -62,10 +59,8 @@ function RegisterForm() {
             onChange={ ({ target }) => setName(target.value) }
           />
         </label>
-        <br />
         <label className="label-email" htmlFor="email">
           Email
-          <br />
           <input
             id="email"
             data-testid="common_register__input-email"
@@ -77,9 +72,7 @@ function RegisterForm() {
           />
         </label>
         <label className="label-login" htmlFor="password">
-          <br />
           Senha
-          <br />
           <input
             id="password"
             data-testid="common_register__input-password"
@@ -99,19 +92,67 @@ function RegisterForm() {
           </p>
         ) : null }
 
-        <br />
         <button
           data-testid="common_register__button-register"
           type="button"
           disabled={ disabled }
           onClick={ handleNewUser }
+          className="register-btn"
         >
           CADASTRAR
         </button>
-      </div>
-      <div>
         <LoginErrorHandler message={ error } />
       </div>
+      <style jsx>
+        {`
+          .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20vh;
+          }
+
+          .register-container {
+            width: 80%;
+            display: grid;
+            gap: 1rem;
+          }
+
+          label {
+            display: grid;
+            gap: 0.25rem;
+          }
+
+          input {
+            width: 100%;
+            padding: 0.25rem;
+          }
+
+          .register-btn, .register-btn {
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+          }
+
+          .register-btn {
+            background-color: #00ff87;
+            color: black;
+            font-weight: bold;
+          }
+          
+          .register-btn:disabled {
+            background-color: #00ff8843;
+            color: rgba(0, 0, 0, 0.252);
+          }
+
+          .register-btn {
+
+          }
+        `}
+      </style>
     </div>
   );
 }
