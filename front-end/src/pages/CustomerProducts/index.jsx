@@ -60,7 +60,7 @@ function CustomerProducts() {
   return (
     <div className="products-body">
       <Header />
-      <p>{`Quantidade total: ${totalQty}`}</p>
+      {/* <p>{`Quantidade total: ${totalQty}`}</p> */}
       <div className="products-container">
         {!loading
           && listProducts.map((product, index) => (
@@ -107,7 +107,7 @@ function CustomerProducts() {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1em;
-            padding: 1rem;
+            padding: 3rem 1rem;
           }
 
           .products-body {
