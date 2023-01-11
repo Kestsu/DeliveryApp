@@ -13,9 +13,20 @@ function CustomerCheckout() {
   return (
     <div>
       <Header />
-      <p>Finalizar Pedido</p>
-      <TableProducts list={ products } setProducts={ setProducts } />
-      <DetailsAddress />
+      <div className="page-container">
+        <h1>Finalizar Pedido</h1>
+        <TableProducts list={ products } setProducts={ setProducts } />
+        <DetailsAddress />
+      </div>
+      <style jsx>
+        {`
+          .page-container {
+            display: grid;
+            gap: 2rem;
+          }
+        `}
+
+      </style>
     </div>
   );
 }

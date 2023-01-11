@@ -63,3 +63,7 @@
     transform: rotate(-10deg);
   }
 }
+
+.page-container {
+  padding: 4rem 1rem;
+}

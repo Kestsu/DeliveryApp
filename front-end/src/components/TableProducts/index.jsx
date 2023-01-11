@@ -47,7 +47,7 @@ function TableProducts({ list, setProducts }) {
 
   return (
     <div>
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <th>Item</th>
@@ -58,8 +58,8 @@ function TableProducts({ list, setProducts }) {
             {TypeURL === 'checkout' ? <th>Remover Item</th> : ''}
           </tr>
         </thead>
-        <tbody>
-          {/* {
+        <tbody> */}
+      {/* {
             list?.map((item, index) => (
               <Tabela
                 key={ item.id }
@@ -70,14 +70,14 @@ function TableProducts({ list, setProducts }) {
               />
             ))
           } */}
-          <Tabela
-            list={ list }
-            fun={ removeProduct }
-            type={ TypeURL }
-            total={ Total }
-          />
-        </tbody>
-      </table>
+      <Tabela
+        list={ list }
+        fun={ removeProduct }
+        type={ TypeURL }
+        total={ Total }
+      />
+      {/* </tbody>
+      </table> */}
       {/* {TypeURL === 'checkout' ? (
         <div data-testid="customer_checkout__element-order-total-price">
           {`Total: R$${Total.toFixed(2).replace('.', ',')}`}

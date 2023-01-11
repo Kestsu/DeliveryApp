@@ -45,9 +45,9 @@ function DetailsAddress() {
   };
 
   return (
-    <div>
-      <p>Detalhes e Endereço para Entrega</p>
-      <div>
+    <div className="address-container">
+      <h2>Detalhes e Endereço para Entrega</h2>
+      <div className="address-detail-container">
         <label htmlFor="seller">
           P. Vendedora Responsavel
           <select
@@ -89,9 +89,41 @@ function DetailsAddress() {
         data-testid="customer_checkout__button-submit-order"
         disabled={ disabled }
         onClick={ () => payment() }
+        className="submit-btn"
       >
         FINALIZAR PEDIDO
       </button>
+      <style jsx>
+        {`
+          .address-container, .address-detail-container {
+            display: grid;
+            gap: 1rem;
+          }
+
+          label {
+            display: grid;
+            gap: 0.25rem;
+          }
+
+          input, select {
+            padding: 0.5rem;
+          }
+
+          .submit-btn {
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+          }
+          
+          .submit-btn:disabled {
+            opacity: 60%;
+          }
+        `}
+      </style>
     </div>
   );
 }
