@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .App {
   align-items: center;
   background: #0fa36b;
@@ -13,7 +19,7 @@
 .App > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
-  font-family: Montserrat , sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 3em;
   font-weight: 900;
 }
@@ -24,7 +30,6 @@
 }
 
 @keyframes shake {
-
   0% {
     transform: rotate(5deg);
   }
@@ -39,7 +44,6 @@
 }
 
 @keyframes clink {
-
   0% {
     transform: rotate(-10deg);
   }

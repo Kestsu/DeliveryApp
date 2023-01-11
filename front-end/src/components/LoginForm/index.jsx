@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import rockGlass from '../../images/rockGlass.svg';
+// import rockGlass from '../../images/rockGlass.svg';
 import LoginErrorHandler from '../LoginErrorHandler';
 
 function LoginForm() {
@@ -42,31 +42,28 @@ function LoginForm() {
   };
 
   return (
-    <div>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
+    <div className="container">
+      {/* <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
         Glass
       </object>
       <div className="AppName">
         <p>Nome do seu app</p>
-      </div>
+      </div> */}
       <div className="login-container">
         <label className="label-login" htmlFor="email">
-          Login
-          <br />
+          Login:
           <input
             id="email"
             data-testid="common_login__input-email"
             type="email"
-            placeholder="Digite seu email "
+            placeholder="Digite seu email"
             value={ email }
             className="input-login"
             onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
         <label className="label-login" htmlFor="password">
-          <br />
           Senha:
-          <br />
           <input
             id="password"
             data-testid="common_login__input-password"
@@ -77,25 +74,75 @@ function LoginForm() {
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
-        <br />
         <button
           data-testid="common_login__button-login"
           type="button"
           disabled={ disabled }
           onClick={ handleSign }
+          className="login-btn"
         >
           LOGIN
         </button>
-        <br />
         <button
           data-testid="common_login__button-register"
           type="button"
           onClick={ handleRegister }
+          className="register-btn"
         >
           Ainda não tenho conta
         </button>
       </div>
       <LoginErrorHandler message={ error } />
+      <style jsx>
+        {`
+          .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20vh;
+          }
+
+          .login-container {
+            width: 80%;
+            display: grid;
+            gap: 1rem;
+          }
+
+          .label-login {
+            display: grid;
+            gap: 0.25rem;
+          }
+
+          .input-login {
+            width: 100%;
+            padding: 0.25rem;
+          }
+
+          .login-btn, .register-btn {
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+          }
+
+          .login-btn {
+            background-color: #00ff87;
+            color: black;
+            font-weight: bold;
+          }
+          
+          .login-btn:disabled {
+            background-color: #00ff8843;
+            color: rgba(0, 0, 0, 0.252);
+          }
+
+          .register-btn {
+
+          }
+        `}
+      </style>
     </div>
   );
 }

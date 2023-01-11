@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
 import api from '../../../../helpers/api';
 
 function UserForm({ usersList, setUsersList }) {
