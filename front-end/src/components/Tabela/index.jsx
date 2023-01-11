@@ -69,8 +69,10 @@ function Tabela(props) {
               </button>
             </div>
           ))}
-          {/* </tbody> */}
-          <div data-testid="customer_checkout__element-order-total-price">
+          <div
+            className="total-price"
+            data-testid="customer_checkout__element-order-total-price"
+          >
             Total: R$
             {' '}
             {`${total.toFixed(2).replace('.', ',')}`}
@@ -158,7 +160,10 @@ function Tabela(props) {
               </div>
             ))}
           </div>
-          <div data-testid="seller_order_details__element-order-total-price">
+          <div
+            className="total-price"
+            data-testid="seller_order_details__element-order-total-price"
+          >
             Total: R$
             {' '}
             {`${total.toFixed(2).replace('.', ',')}`}
@@ -187,6 +192,7 @@ function Tabela(props) {
           }
           .total-price {
             font-size: 1.25rem;
+            margin-top: 0.5rem;
           }
 
           .delete-item-btn {

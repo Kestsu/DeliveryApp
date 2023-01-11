@@ -70,52 +70,82 @@ function OrdersSellerDetails() {
       {loading ? (
         <h1>carregando...</h1>
       ) : (
-        <div className="fundoClaro">
+        <div className="page-container">
           <h1>Detalhe Do Pedido</h1>
+          <div className="flex-between">
+            <h3 data-testid="seller_order_details__element-order-details-label-order-id">
+              {`PEDIDO ${`${database?.id}`?.padStart(quatro, '0')}`}
+            </h3>
+            <h3
+              data-testid="seller_order_details__element-order-details-label-order-date"
+            >
+              {day}
+            </h3>
+          </div>
           <h3
-            data-testid="seller_order_details__element-order-details-label-order-id"
-          >
-            {`PEDIDO ${`${database?.id}`?.padStart(quatro, '0')}`}
-
-          </h3>
-          <h3
-            data-testid="seller_order_details__element-order-details-label-order-date"
-          >
-            {day}
-
-          </h3>
-          <h3
-            data-testid={ 'seller_order_details__'
-            + 'element-order-details-label-delivery-status' }
+            data-testid={
+              'seller_order_details__'
+              + 'element-order-details-label-delivery-status'
+            }
           >
             {statusAtual}
-
           </h3>
           <button
-            className="fundo"
             type="button"
             disabled={ disabledPreparing }
             data-testid="seller_order_details__button-preparing-check"
             onClick={ () => updateStatus('Preparando') }
+            className="delivery-check-btn"
           >
             PREPARAR PEDIDO
-
           </button>
           <button
-            className="fundoRosa"
             type="button"
             disabled={ disabledDispatch }
             data-testid="seller_order_details__button-dispatch-check"
             onClick={ () => updateStatus(preparar) }
+            className="delivery-check-btn"
           >
             SAIU PARA ENTREGA
-
           </button>
           <div>
             <TableProducts list={ products } />
           </div>
         </div>
       )}
+      <style jsx>
+        {`
+          .page-container {
+            display: grid;
+            gap: 1rem;
+          }
+          
+          .delivery-check-btn {
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+          }
+
+          .delivery-check-btn:disabled {
+            opacity: 40%;
+          }
+
+          .flex-between {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .order-info {
+            display: grid;
+            gap: 0.5rem;
+          }
+        `}
+
+      </style>
     </div>
   );
 }
