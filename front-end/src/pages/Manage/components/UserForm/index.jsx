@@ -147,7 +147,7 @@ function UserForm({ usersList, setUsersList }) {
             font-weight: bold;
           }
 
-          .delivery-check-btn:disabled {
+          .submit-btn:disabled {
             opacity: 40%;
           }
 

@@ -26,6 +26,16 @@ function Manage() {
         <UserForm usersList={ usersList } setUsersList={ setUsersList } />
         <UsersTable usersList={ usersList } setUsersList={ setUsersList } />
       </div>
+      <style jsx>
+        {`
+         .page-container {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+         }
+        `}
+
+      </style>
     </>
   );
 }
