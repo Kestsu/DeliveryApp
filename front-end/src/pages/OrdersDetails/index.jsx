@@ -43,17 +43,22 @@ function OrdersDetails() {
       <Header />
       <div className="page-container">
         <h1>Detalhe do Pedido</h1>
-        <div>
-          <p data-testid="customer_order_details__element-order-details-label-order-id">
-            {`PEDIDO ${`${order?.id}`?.padStart(quatro, '0')}`}
-          </p>
+        <div className="order-info">
+          <div className="flex-between">
+            <p data-testid="customer_order_details__element-order-details-label-order-id">
+              {`PEDIDO ${`${order?.id}`?.padStart(quatro, '0')}`}
+            </p>
+
+            <p
+              data-testid="customer_order_details__element-order-details-label-order-date"
+            >
+              {date}
+            </p>
+          </div>
           <p
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
             {`P. Vend: ${order?.seller?.name} `}
-          </p>
-          <p data-testid="customer_order_details__element-order-details-label-order-date">
-            {date}
           </p>
           <p
             data-testid={ 'customer_order_details__'
@@ -68,6 +73,7 @@ function OrdersDetails() {
             onClick={ () => {
               updateStatus();
             } }
+            className="delivery-check-btn"
           >
             MARCAR COMO ENTREGUE
           </button>
@@ -87,6 +93,26 @@ function OrdersDetails() {
           .page-container {
             display: grid;
             gap: 2rem;
+          }
+          
+          .delivery-check-btn {
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+          }
+
+          .flex-between {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .order-info {
+            display: grid;
+            gap: 0.5rem;
           }
         `}
 

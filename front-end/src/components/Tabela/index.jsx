@@ -78,7 +78,7 @@ function Tabela(props) {
         </>
       )}
       {type === 'ordersDetails' && (
-        <div>
+        <div className="items-container">
           {lista?.map(({ name, quantity, price }, index) => (
             <div className="item" key={ index }>
               <div
@@ -112,7 +112,10 @@ function Tabela(props) {
               </div>
             </div>
           ))}
-          <div data-testid="customer_order_details__element-order-total-price">
+          <div
+            className="total-price"
+            data-testid="customer_order_details__element-order-total-price"
+          >
             Total: R$
             {' '}
             {`${total.toFixed(2).replace('.', ',')}`}
@@ -121,16 +124,9 @@ function Tabela(props) {
       )}
       {(type !== 'checkout' && type !== 'ordersDetails') && (
         <div>
-          <div>
+          <div className="items-container">
             {lista?.map(({ name, quantity, price }, index) => (
-              <div key={ index }>
-                <div
-                  data-testid={
-                    `seller_order_details__element-order-table-item-number-${index}`
-                  }
-                >
-                  {index + 1}
-                </div>
+              <div className="item" key={ index }>
                 <div
                   data-testid={
                     `seller_order_details__element-order-table-name-${index}`
@@ -188,6 +184,9 @@ function Tabela(props) {
           .item-price-info {
             display: flex;
             gap: 1rem;
+          }
+          .total-price {
+            font-size: 1.25rem;
           }
 
           .delete-item-btn {
