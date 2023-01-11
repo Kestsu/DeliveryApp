@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #240b36;
+}
+
 .App {
   align-items: center;
   background: #0fa36b;

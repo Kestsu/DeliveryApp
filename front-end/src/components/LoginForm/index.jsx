@@ -128,14 +128,13 @@ function LoginForm() {
           }
 
           .login-btn {
-            background-color: #00ff87;
-            color: black;
+            background-color: var(--primary-color);
+            color: white;
             font-weight: bold;
           }
           
           .login-btn:disabled {
-            background-color: #00ff8843;
-            color: rgba(0, 0, 0, 0.252);
+            opacity: 60%;
           }
 
           .register-btn {

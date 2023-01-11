@@ -138,14 +138,14 @@ function RegisterForm() {
           }
 
           .register-btn {
-            background-color: #00ff87;
-            color: black;
+            background-color: var(--primary-color);
+            color: white;
             font-weight: bold;
           }
           
           .register-btn:disabled {
-            background-color: #00ff8843;
-            color: rgba(0, 0, 0, 0.252);
+            background-color: var(--primary-color);
+            opacity: 60%;
           }
 
           .register-btn {
