@@ -73,6 +73,7 @@ function Header() {
             position: fixed;
             width: 100vw;
             background-color: white;
+            z-index: 90;
           }
 
           nav {

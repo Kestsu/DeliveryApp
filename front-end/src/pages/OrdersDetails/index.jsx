@@ -105,6 +105,10 @@ function OrdersDetails() {
             font-weight: bold;
           }
 
+          .delivery-check-btn:disabled {
+            opacity: 40%;
+          }
+
           .flex-between {
             display: flex;
             justify-content: space-between;
