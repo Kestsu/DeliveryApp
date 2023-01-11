@@ -80,14 +80,7 @@ function Tabela(props) {
       {type === 'ordersDetails' && (
         <div>
           {lista?.map(({ name, quantity, price }, index) => (
-            <div key={ index }>
-              <div
-                data-testid={
-                  `customer_order_details__element-order-table-item-number-${index}`
-                }
-              >
-                {index + 1}
-              </div>
+            <div className="item" key={ index }>
               <div
                 data-testid={
                   `customer_order_details__element-order-table-name-${index}`
@@ -97,17 +90,18 @@ function Tabela(props) {
               </div>
               <div
                 data-testid={
-                  `customer_order_details__element-order-table-quantity-${index}`
-                }
-              >
-                {quantity}
-              </div>
-              <div
-                data-testid={
                   `customer_order_details__element-order-table-unit-price-${index}`
                 }
               >
                 {`R$${price.replace('.', ',')}`}
+              </div>
+              <div
+                data-testid={
+                  `customer_order_details__element-order-table-quantity-${index}`
+                }
+              >
+                {quantity}
+                x
               </div>
               <div
                 data-testid={

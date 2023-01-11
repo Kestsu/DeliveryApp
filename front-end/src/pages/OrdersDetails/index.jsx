@@ -41,41 +41,56 @@ function OrdersDetails() {
   return (
     <div>
       <Header />
-      <h1>Detalhe do Pedido</h1>
-      <div>
-        <p data-testid="customer_order_details__element-order-details-label-order-id">
-          {`PEDIDO ${`${order?.id}`?.padStart(quatro, '0')}`}
-        </p>
-        <p data-testid="customer_order_details__element-order-details-label-seller-name">
-          {`P. Vend: ${order?.seller?.name} `}
-        </p>
-        <p data-testid="customer_order_details__element-order-details-label-order-date">
-          {date}
-        </p>
-        <p
-          data-testid={ 'customer_order_details__'
-           + 'element-order-details-label-delivery-status' }
-        >
-          {status}
-        </p>
-        <button
-          type="button"
-          data-testid="customer_order_details__button-delivery-check"
-          disabled={ disabled }
-          onClick={ () => {
-            updateStatus();
-          } }
-        >
-          MARCAR COMO ENTREGUE
-        </button>
-      </div>
-      {loading ? (
-        <h1>carregando...</h1>
-      ) : (
+      <div className="page-container">
+        <h1>Detalhe do Pedido</h1>
         <div>
-          <TableProducts list={ products } />
+          <p data-testid="customer_order_details__element-order-details-label-order-id">
+            {`PEDIDO ${`${order?.id}`?.padStart(quatro, '0')}`}
+          </p>
+          <p
+            data-testid="customer_order_details__element-order-details-label-seller-name"
+          >
+            {`P. Vend: ${order?.seller?.name} `}
+          </p>
+          <p data-testid="customer_order_details__element-order-details-label-order-date">
+            {date}
+          </p>
+          <p
+            data-testid={ 'customer_order_details__'
+           + 'element-order-details-label-delivery-status' }
+          >
+            {status}
+          </p>
+          <button
+            type="button"
+            data-testid="customer_order_details__button-delivery-check"
+            disabled={ disabled }
+            onClick={ () => {
+              updateStatus();
+            } }
+          >
+            MARCAR COMO ENTREGUE
+          </button>
         </div>
-      )}
+
+        {loading ? (
+          <h1>carregando...</h1>
+        ) : (
+          <div>
+            <TableProducts list={ products } />
+          </div>
+        )}
+      </div>
+
+      <style jsx>
+        {`
+          .page-container {
+            display: grid;
+            gap: 2rem;
+          }
+        `}
+
+      </style>
     </div>
   );
 }
