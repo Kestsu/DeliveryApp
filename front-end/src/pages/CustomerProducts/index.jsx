@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { IoCart } from 'react-icons/io5';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import api from '../../helpers/api';
 import ProductCard from './components/ProductCard';
-import './styles.css';
 
 const sumReduce = (total, item) => {
   if (item.quantity) {
@@ -58,7 +58,7 @@ function CustomerProducts() {
   };
 
   return (
-    <div className="products-body test">
+    <div className="products-body">
       <Header />
       <p>{`Quantidade total: ${totalQty}`}</p>
       <div className="products-container">
@@ -88,7 +88,12 @@ function CustomerProducts() {
         disabled={ totalQty === 0 }
         onClick={ clickCheckoutButton }
       >
-        Ver Carrinho: Valor Total R$:
+        <span className="cart-icon">
+          <IoCart />
+        </span>
+        {' '}
+        Ver Carrinho: R$
+        {' '}
         <span data-testid="customer_products__checkout-bottom-value">
           {console.log('totalPrice', totalPrice)}
           {totalPrice !== 0
@@ -103,6 +108,37 @@ function CustomerProducts() {
             grid-template-columns: repeat(4, 1fr);
             gap: 1em;
             padding: 1rem;
+          }
+
+          .products-body {
+            padding-bottom: 5em;
+            width: 100%;
+          }
+
+          .checkout-button {
+            bottom: 0;
+            height: 3em;
+            position: fixed;
+            width: 100%;
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0px 0px 50px var(--primary-color);
+          }
+
+          .checkout-button:disabled {
+            opacity: 0%;
+          }
+
+          .cart-icon {
+            display: flex;
+            font-size: 2rem;
           }
 
           @media (max-width: 720px) {
