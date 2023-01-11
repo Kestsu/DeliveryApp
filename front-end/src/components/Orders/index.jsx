@@ -37,9 +37,9 @@ function Orders() {
   };
 
   return (
-    <>
+    <div className="page-container">
       {user.role === 'customer' ? (
-        <div className="page-container">
+        <>
           {orders.map((item) => (
             <div className="item" key={ item.id }>
               <div className="flex-between">
@@ -80,41 +80,44 @@ function Orders() {
               </div>
             </div>
           ))}
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           {orders.map((item) => (
             <div key={ item.id }>
-              <card onClick={ () => orderDetails(item.id) }>
-                <p
-                  key={ item.id }
-                  data-testid={ `seller_orders__element-order-id-${item.id}` }
-                >
-                  {`PEDIDO ${`${item?.id}`?.padStart(quatro, '0')}`}
-                </p>
+              <card className="item" onClick={ () => orderDetails(item.id) }>
+                <div className="flex-between">
+                  <p
+                    key={ item.id }
+                    data-testid={ `seller_orders__element-order-id-${item.id}` }
+                  >
+                    {`PEDIDO ${`${item?.id}`?.padStart(quatro, '0')}`}
+                  </p>
 
-                <p
-                  key={ item.status }
-                  data-testid={ `seller_orders__element-delivery-status-${item.id}` }
-                >
-                  {item.status}
-                </p>
+                  <p
+                    key={ item.saleDate }
+                    data-testid={ `seller_orders__element-order-date-${item.id}` }
+                  >
+                    {alterarFormatoData(item.saleDate)}
+                  </p>
+                </div>
 
-                <p
-                  key={ item.saleDate }
-                  data-testid={ `seller_orders__element-order-date-${item.id}` }
-                >
-                  {alterarFormatoData(item.saleDate)}
-                </p>
-
-                <p
-                  key={ item.totalPrice }
-                  data-testid={ `seller_orders__element-card-price-${item.id}` }
-                >
-                  R$
-                  {' '}
-                  {item?.totalPrice?.replace('.', ',')}
-                </p>
+                <div className="flex-between">
+                  <p
+                    key={ item.totalPrice }
+                    data-testid={ `seller_orders__element-card-price-${item.id}` }
+                  >
+                    R$
+                    {' '}
+                    {item?.totalPrice?.replace('.', ',')}
+                  </p>
+                  <p
+                    key={ item.status }
+                    data-testid={ `seller_orders__element-delivery-status-${item.id}` }
+                  >
+                    {item.status}
+                  </p>
+                </div>
 
                 <p
                   key={ item.deliveryAddress }
@@ -125,7 +128,7 @@ function Orders() {
               </card>
             </div>
           ))}
-        </div>
+        </>
       )}
       <style jsx>
         {`
@@ -144,6 +147,12 @@ function Orders() {
             gap: 0.5rem;
           }
 
+          card {
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+          }
+
           .access-btn {
             background-color: var(--primary-color);
             border: none;
@@ -153,7 +162,7 @@ function Orders() {
           }
         `}
       </style>
-    </>
+    </div>
   );
 }
 
