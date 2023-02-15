@@ -24,15 +24,12 @@ function TableProducts({ list, setProducts }) {
 
   useEffect(() => {
     if (history.location.pathname === '/customer/checkout') {
-      // console.log('checkout');
       setTypeURL('checkout');
     }
     if (history.location.pathname.includes('/customer/orders/')) {
-      // console.log('ordersDetails');
       setTypeURL('ordersDetails');
     }
     if (history.location.pathname.includes('/seller/order/')) {
-      // console.log('seller');
       setTypeURL('seller');
     }
 

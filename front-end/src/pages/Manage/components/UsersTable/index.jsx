@@ -23,13 +23,6 @@ function UsersTable({ usersList, setUsersList }) {
           usersList.map((user, index) => (
             <div className="item" key={ user.id }>
               <div className="item-info">
-                {/* <div
-                    data-testid={
-                      `admin_manage__element-user-table-item-number-${index + 1}`
-                    }
-                  >
-                    { user.id }
-                  </div> */}
                 <div
                   data-testid={
                     `admin_manage__element-user-table-name-${index + 1}`

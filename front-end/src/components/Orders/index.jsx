@@ -7,16 +7,12 @@ const quatro = 4;
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  // const [role, setRole] = useState([]);
   const history = useHistory();
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const response = async () => {
       const { data } = await api.get('/sales');
-      // const { role } = localStorage.getItem('user');
-      // const typeUser = JSON.parse({ role });
-      // setRole(typeUser);
       setOrders(data);
     };
     response();

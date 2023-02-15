@@ -71,13 +71,11 @@ const useAuth = () => {
   }, []);
 
   const handleLogin = async ({ userData }) => {
-    setLoading(true);
-
     try {
       const { data } = await api.post('/login', userData);
+      setLoading(true);
 
       localStorage.setItem('user', JSON.stringify(data));
-
       if (!data.message) {
         api.defaults.headers.Authorization = `${data.token}`;
         setUser(data);
@@ -94,8 +92,8 @@ const useAuth = () => {
       setLoading(false);
       return 'error';
     } catch (err) {
-      console.log(err);
-      setLoading(false);
+      console.log(err.response.status);
+      // setLoading(false);
     }
   };
 
@@ -103,8 +101,6 @@ const useAuth = () => {
     setLoading(true);
 
     try {
-      // descomentar quando tiver o endpoint de blacklist token
-      // await api.delete('/auth/logout');
       setIsAuth(false);
       setUser({});
       localStorage.clear();

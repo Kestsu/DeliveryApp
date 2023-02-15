@@ -44,7 +44,6 @@ function Routes() {
         {
           !isAuth && pathname !== '/register' && <Redirect to="/login" />
         }
-        {/* <Redirect to="/customer/products" /> */}
       </>
     );
   }

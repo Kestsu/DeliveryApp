@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import { IoCloseCircle } from 'react-icons/io5';
 
 function Tabela(props) {
-  // const { fun, index, products, TypeURL } = props;
-  // const { name, quantity, price } = products;
   const [lista, setLista] = useState([]);
   const { list, type, fun, total } = props;
-  // const { name, quantity, price } = list;
 
   useEffect(() => {
     setLista(list);
-    // console.log(type);
   }, [list]);
 
   const handleSubTotal = (quantity, price) => {

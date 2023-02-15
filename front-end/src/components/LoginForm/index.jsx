@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
-// import rockGlass from '../../images/rockGlass.svg';
 import LoginErrorHandler from '../LoginErrorHandler';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [email, setEmail] = useState('fulana@deliveryapp.com');
-  // const [password, setPassword] = useState('fulana@123');
-  // const [email, setEmail] = useState('zebirita@email.com');
-  // const [password, setPassword] = useState('$#zebirita#$');
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState('');
+  const [statusShowError, setStatusShowError] = useState(false);
   const { handleLogin } = useContext(AuthContext);
   const history = useHistory();
 
@@ -38,17 +34,12 @@ function LoginForm() {
 
   const handleSign = async () => {
     await handleLogin({ userData: { email, password } });
+    setStatusShowError(true);
     setError('Digite um email e password válido');
   };
 
   return (
     <div className="container">
-      {/* <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-      <div className="AppName">
-        <p>Nome do seu app</p>
-      </div> */}
       <div className="login-container">
         <label className="label-login" htmlFor="email">
           Login:
@@ -92,7 +83,8 @@ function LoginForm() {
           Ainda não tenho conta
         </button>
       </div>
-      <LoginErrorHandler message={ error } />
+      { (statusShowError)
+     && <LoginErrorHandler message={ error } />}
       <style jsx>
         {`
           .container {
@@ -102,12 +94,16 @@ function LoginForm() {
             flex-direction: column;
             align-items: center;
             padding-top: 20vh;
+            background-color: #f0f0d8;
           }
 
           .login-container {
-            width: 80%;
+            width: 40%;
             display: grid;
             gap: 1rem;
+            background-color: #d8d8c0;
+            border-radius: 32px;
+            padding: 3%;
           }
 
           .label-login {
