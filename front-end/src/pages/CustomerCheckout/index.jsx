@@ -16,13 +16,14 @@ function CustomerCheckout() {
       <div className="page-container">
         <h1>Finalizar Pedido</h1>
         <TableProducts list={ products } setProducts={ setProducts } />
-        <DetailsAddress />
+        <DetailsAddress list={ products } />
       </div>
       <style jsx>
         {`
           .page-container {
             display: grid;
             gap: 2rem;
+            background-color: #f0f0d8;
           }
         `}
 

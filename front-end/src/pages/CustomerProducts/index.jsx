@@ -60,7 +60,6 @@ function CustomerProducts() {
   return (
     <div className="products-body">
       <Header />
-      {/* <p>{`Quantidade total: ${totalQty}`}</p> */}
       <div className="products-container">
         {!loading
           && listProducts.map((product, index) => (
@@ -95,7 +94,6 @@ function CustomerProducts() {
         Ver Carrinho: R$
         {' '}
         <span data-testid="customer_products__checkout-bottom-value">
-          {console.log('totalPrice', totalPrice)}
           {totalPrice !== 0
             ? totalPrice.replace('.', ',')
             : totalPrice.toFixed(2)}

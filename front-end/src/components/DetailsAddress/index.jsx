@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../../helpers/api';
 
-function DetailsAddress() {
+function DetailsAddress({ list }) {
   const [users, setUsers] = useState([]);
   const [seller, setSeller] = useState({});
   const [address, setAddress] = useState('');
@@ -20,10 +21,10 @@ function DetailsAddress() {
   }, []);
 
   useEffect(() => {
-    if (address !== '' && number !== '') { setDisabled(false); } else {
+    if (address !== '' && number !== '' && list.length > 0) { setDisabled(false); } else {
       setDisabled(true);
     }
-  }, [seller, address, number]);
+  }, [seller, address, number, list]);
 
   const payment = async () => {
     const response = localStorage.getItem('products');
@@ -127,5 +128,17 @@ function DetailsAddress() {
     </div>
   );
 }
+
+DetailsAddress.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      urlImage: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default DetailsAddress;
