@@ -16,6 +16,7 @@ function Header() {
               to={ user?.role === 'customer'
                 ? '/customer/products' : '/seller/orders' }
               data-testid="customer_products__element-navbar-link-products"
+              className="options"
             >
               Produtos
             </Link>
@@ -26,6 +27,7 @@ function Header() {
           user?.role === 'customer' && (
             <Link
               to="/customer/orders"
+              className="options"
               data-testid="customer_products__element-navbar-link-orders"
             >
               Meus Pedidos
@@ -36,6 +38,7 @@ function Header() {
           user?.role === 'administrator' && (
             <Link
               to="/admin/manage"
+              className="options"
               data-testid="customer_products__element-navbar-link-orders"
             >
               Gerenciar Usuários
@@ -46,11 +49,6 @@ function Header() {
       </nav>
 
       <div className="user-menu">
-        {/* <p
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          {user?.name}
-        </p> */}
 
         <button
           data-testid="customer_products__element-navbar-link-logout"
@@ -69,21 +67,25 @@ function Header() {
             padding: 0.5rem;
             display: flex;
             justify-content: space-between;
-            border-bottom: 4px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
             position: fixed;
             width: 100vw;
-            background-color: white;
+            background-color: #7a8370;
             z-index: 90;
           }
+          // .options {
+          //   background-color: blue;
+          //   text-decoration: none;
 
+          // }
           nav {
             display: flex;
             gap: 1rem;
             align-items: center;
             font-size: 1rem;
-            color: var(--primary-color);
             font-weight: bold;
           }
+          
 
           .user-menu {
             display: flex;

@@ -108,11 +108,13 @@ function CustomerProducts() {
             grid-template-columns: repeat(4, 1fr);
             gap: 1em;
             padding: 3rem 1rem;
+            background-color: #f0f0d8;
           }
 
           .products-body {
             padding-bottom: 5em;
             width: 100%;
+            background-color: #f0f0d8;
           }
 
           .checkout-button {

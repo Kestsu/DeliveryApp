@@ -70,12 +70,14 @@ function ProductCard({
 
   return (
     <div className="product-card">
-      <img
-        className="product-card-img"
-        src={ urlImage }
-        alt={ name }
-        data-testid={ `customer_products__img-card-bg-image-${id}` }
-      />
+      <div className="product-border">
+        <img
+          className="product-card-img"
+          src={ urlImage }
+          alt={ name }
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+        />
+      </div>
       <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
       <p className="price" data-testid={ `customer_products__element-card-price-${id}` }>
         R$
@@ -96,6 +98,7 @@ function ProductCard({
           data-testid={ `customer_products__input-card-quantity-${id}` }
           value={ Number(quantity) }
           onChange={ ({ target }) => inputQuantity(target.value) }
+          className="number-quantity"
           size={ 1 }
         />
         <button
@@ -117,6 +120,8 @@ function ProductCard({
             overflow: hidden;
             padding: 0.5em;
             gap: 0.5rem;
+            background-color: #d8d8c0;
+            border-radius: 32px;
           }
 
           .product-card-img {
@@ -127,6 +132,10 @@ function ProductCard({
             font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary-color);
+          }
+
+          .number-quantity {
+            background-color: #d8d8c0;
           }
 
           .amount {
@@ -140,6 +149,7 @@ function ProductCard({
             border: none;
             display: flex;
             color: var(--primary-color);
+            
           }
 
           .interaction-btn:disabled {
