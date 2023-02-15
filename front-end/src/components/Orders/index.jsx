@@ -129,18 +129,26 @@ function Orders() {
       <style jsx>
         {`
           .page-container {
-            display: grid;
-            gap: 1rem;
+            display: flex;
+            gap: 3rem;
+            background-color: #f0f0d8;
+            flex-basis: 70%;
+            flex-wrap: wrap;
+            margin: 40px 0;
           }
 
           .flex-between {
             display: flex;
             justify-content: space-between;
           }
-
+          
           .item {
+            border-radius: 23px 23px;
+            background-color: #d8d8c0;
+            padding: 1% 1%;
             display: grid;
-            gap: 0.5rem;
+            gap: 1rem;
+
           }
 
           card {
