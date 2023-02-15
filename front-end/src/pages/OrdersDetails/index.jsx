@@ -39,7 +39,7 @@ function OrdersDetails() {
     }
   };
   return (
-    <div>
+    <div className="page">
       <Header />
       <div className="page-container">
         <h1>Detalhe do Pedido</h1>
@@ -93,6 +93,7 @@ function OrdersDetails() {
           .page-container {
             display: grid;
             gap: 2rem;
+            background-color: #f0f0d8;
           }
           
           .delivery-check-btn {
