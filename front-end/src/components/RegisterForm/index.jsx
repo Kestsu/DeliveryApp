@@ -16,13 +16,13 @@ function RegisterForm() {
       const six = 6;
       const twenteen = 12;
 
-      if (name.length <= twenteen) {
+      if (name.length <= twenteen && name.length !== 0) {
         setError('Digite um nome com mais de 12 caracteres');
       }
-      if (email.match(isValid) === null) {
+      if (email.match(isValid) === null && email.length !== 0) {
         setError('Digite um email válido');
       }
-      if (password.length < six) {
+      if (password.length < six && password.length !== 0) {
         setError('Digite uma senha com mais de 6 digitos');
       }
 
@@ -38,6 +38,10 @@ function RegisterForm() {
     handleDisabled();
   }, [email, password, name]);
 
+  const handleName = (target) => {
+    setName(target);
+  };
+
   const handleNewUser = async () => {
     await handleRegister({ userData: { name, email, password } });
     setError('Email já existente');
@@ -45,8 +49,8 @@ function RegisterForm() {
 
   return (
     <div className="container">
-      <h1>Cadastro</h1>
       <div className="register-container">
+        <h1>Cadastro</h1>
         <label className="label-name" htmlFor="name">
           Nome
           <input
@@ -56,7 +60,7 @@ function RegisterForm() {
             placeholder="Seu nome"
             value={ name }
             className="input-name"
-            onChange={ ({ target }) => setName(target.value) }
+            onChange={ ({ target }) => handleName(target.value) }
           />
         </label>
         <label className="label-email" htmlFor="email">
@@ -84,13 +88,13 @@ function RegisterForm() {
           />
         </label>
 
-        { error ? (
+        {/* { error ? (
           <p
             data-testid="common_register__element-invalid_register"
           >
             Corrija seus dados, Por favor!
           </p>
-        ) : null }
+        ) : null } */}
 
         <button
           data-testid="common_register__button-register"
@@ -112,12 +116,17 @@ function RegisterForm() {
             flex-direction: column;
             align-items: center;
             padding-top: 20vh;
+            background-color: #f0f0d8;
           }
 
+
           .register-container {
-            width: 80%;
+            width: 40%;
             display: grid;
             gap: 1rem;
+            background-color: #d8d8c0;
+            border-radius: 32px;
+            padding: 3%;
           }
 
           label {

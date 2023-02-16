@@ -23,16 +23,32 @@ function Manage() {
     <>
       <Header />
       <div className="page-container">
-        <UserForm usersList={ usersList } setUsersList={ setUsersList } />
-        <UsersTable usersList={ usersList } setUsersList={ setUsersList } />
+        <div className="userform-container">
+          <UserForm usersList={ usersList } setUsersList={ setUsersList } />
+        </div>
+        <div className="users-table-container">
+          <UsersTable usersList={ usersList } setUsersList={ setUsersList } />
+        </div>
       </div>
       <style jsx>
-        {`
-         .page-container {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
+        {`       
+          .page-container {
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0d8;
+            gap: 1rem;
          }
+          .userform-container {
+            background-color: #d8d8c0;
+            padding: 1% 2%;
+            border-radius: 10px
+          }
+
+          .users-table-container {
+            background-color: #d8d8c0;
+            padding: 1% 2%;
+            border-radius: 10px
+          }
         `}
 
       </style>

@@ -114,10 +114,9 @@ const useAuth = () => {
   };
 
   const handleRegister = async ({ userData }) => {
-    setLoading(true);
-
     try {
       const { data } = await api.post('/register', userData);
+      setLoading(true);
       if (!data.message) {
         localStorage.setItem('user', JSON.stringify(data));
 

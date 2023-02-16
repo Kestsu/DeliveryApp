@@ -63,7 +63,7 @@ function UserForm({ usersList, setUsersList }) {
         </div>
 
         <div>
-          E-mail:
+          Email:
           <input
             type="text"
             id="email"
@@ -89,7 +89,7 @@ function UserForm({ usersList, setUsersList }) {
         </div>
 
         <div>
-          Role:
+          Cargo:
           <select
             id="role"
             data-testid="admin_manage__select-role"
