@@ -37,8 +37,8 @@ function Orders() {
       {user.role === 'customer' ? (
         <>
           {orders.map((item) => (
-            <div className="item" key={ item.id }>
-              <div className="flex-between">
+            <div className="item-customer" key={ item.id }>
+              <div className="flex-between-customer">
                 <p
                   key={ item.id }
                   data-testid={ `customer_orders__element-order-id-${item.id}` }
@@ -54,7 +54,7 @@ function Orders() {
                 </p>
               </div>
 
-              <div className="flex-between">
+              <div className="flex-between-customer">
                 <p
                   key={ item.totalPrice }
                   data-testid={ `customer_orders__element-card-price-${item.id}` }
@@ -81,8 +81,8 @@ function Orders() {
         <>
           {orders.map((item) => (
             <div key={ item.id }>
-              <card className="item" onClick={ () => orderDetails(item.id) }>
-                <div className="flex-between">
+              <card className="item-seller" onClick={ () => orderDetails(item.id) }>
+                <div className="flex-between-seller">
                   <p
                     key={ item.id }
                     data-testid={ `seller_orders__element-order-id-${item.id}` }
@@ -98,7 +98,7 @@ function Orders() {
                   </p>
                 </div>
 
-                <div className="flex-between">
+                <div className="flex-between-seller">
                   <p
                     key={ item.totalPrice }
                     data-testid={ `seller_orders__element-card-price-${item.id}` }
@@ -137,15 +137,30 @@ function Orders() {
             margin: 40px 0;
           }
 
-          .flex-between {
+          .flex-between-customer {
             display: flex;
             justify-content: space-between;
+            padding: 1% 1%;
+          }
+          .flex-between-seller {
+            display: flex;
+            justify-content: space-between;
+            padding: 3% 6%;
           }
           
-          .item {
+          .item-customer {
             border-radius: 23px 23px;
             background-color: #d8d8c0;
-            padding: 1% 1%;
+            padding: 1% 5%;
+            display: grid;
+            gap: 1rem;
+
+          }
+
+          .item-seller {
+            border-radius: 23px 23px;
+            background-color: #d8d8c0;
+            padding: 9px 10px;
             display: grid;
             gap: 1rem;
 
