@@ -118,6 +118,7 @@ function OrdersSellerDetails() {
           .page-container {
             display: grid;
             gap: 1rem;
+            background-color: #f0f0d8;
           }
           
           .delivery-check-btn {

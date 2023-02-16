@@ -170,7 +170,10 @@ function Tabela(props) {
         {`
           .items-container {
             display: grid;
-            gap: 1rem;
+            gap: 2rem;
+            background-color: #d8d8c0;
+            border-radius: 23px;
+            padding: 1% 2%
           }
 
           .item {
@@ -189,6 +192,8 @@ function Tabela(props) {
           .total-price {
             font-size: 1.25rem;
             margin-top: 0.5rem;
+            padding: 1%;
+            text-decoration: inherit;
           }
 
           .delete-item-btn {
