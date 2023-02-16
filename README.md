@@ -1,6 +1,15 @@
 # App Delivery: Um e-comerce concentrado na venda de bebidas!
 
-Essa aplicação foi feita em grupo. Envolveu conhecimento em react, context, api, swaggerhub, sql, docker e entre outros.
+## Conhecimento envolvido: 
+
+- React
+- Context
+- Api
+- Swaggerhub
+- Axios
+- Sql
+- MongoDB
+- Docker
 
 ## Execução da aplicação localmente
 
