@@ -1,4 +1,15 @@
-# App Delivery: Um e-comerce concentrado na venda de bebidas!
+# App Delivery: Uma plataforma de delivery de cerveja. 🍻! (Back-end & Front-end)
+
+Esse projeto tem a interação entre o back-end e o front-end.
+
+Esse site tem como objtivo ajuda a dona Tereza, a expandir seu negocio via delivery. E essa aplicação ajudou a agilizar a vida de sua equipe e das pessoas que compram seus produtos.
+
+O aplicativo tem:
+
+Tem acesso via login: tanto clientes como pessoas vendedoras, assim como a própria dona Tereza, que administra o sistema.
+
+Tem comunicação entre clientes e pessoas vendedoras: a pessoa cliente faz o pedido via "carrinho de compras" e a pessoa vendedora aprova, prepara e envia esse pedido. Quando o produto é recebido por quem comprou, essa pessoa marca o pedido como "recebido". Ambos devem possuir detalhes sobre seus pedidos;
+Se a pessoa cliente faz o pedido, o mesmo deve aparecer para a pessoa vendedora em seu dash de pedidos após a atualização da página. A pessoa cliente, por sua vez, deve ter as informações sobre seu pedido quando sua página for atualizada, ou seja, ter informações se o pedido está sendo preparado ou se já saiu pra entrega.
 
 ## Conhecimento envolvido: 
 
