@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import LoginErrorHandler from '../LoginErrorHandler';
+import logo from '../../images/logo.png';
 
 function RegisterForm() {
   const [name, setName] = useState('');
@@ -49,6 +50,7 @@ function RegisterForm() {
 
   return (
     <div className="container">
+      <img src={ logo } alt="logo" width="150px" height="150px" />
       <div className="register-container">
         <h1>Cadastro</h1>
         <label className="label-name" htmlFor="name">
@@ -113,6 +115,7 @@ function RegisterForm() {
             width: 100vw;
             height: 100vh;
             display: flex;
+            justify-content: space-around;
             flex-direction: column;
             align-items: center;
             padding-top: 20vh;

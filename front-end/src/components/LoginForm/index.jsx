@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import logo from '../../images/logo.png';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import LoginErrorHandler from '../LoginErrorHandler';
 
@@ -40,6 +41,7 @@ function LoginForm() {
 
   return (
     <div className="container">
+      <img src={ logo } alt="logo" width="150px" height="150px" />
       <div className="login-container">
         <label className="label-login" htmlFor="email">
           Login:
@@ -92,6 +94,7 @@ function LoginForm() {
             height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
             align-items: center;
             padding-top: 20vh;
             background-color: #f0f0d8;

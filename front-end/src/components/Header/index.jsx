@@ -3,12 +3,14 @@ import { IoLogOut } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import './styles.css';
+import logo from '../../images/logo.png';
 
 function Header() {
   const { handleLogout, user } = useContext(AuthContext);
 
   return (
     <header>
+      <img src={ logo } alt="logo" width="40px" height="40px" />
       <nav>
         {
           user?.role !== 'administrator' && (
@@ -73,7 +75,7 @@ function Header() {
             background-color: #7a8370;
             z-index: 90;
           }
-          // .options {
+          // link {
           //   background-color: blue;
           //   text-decoration: none;
 
