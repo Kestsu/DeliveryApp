@@ -31,23 +31,12 @@ Se a pessoa cliente faz o pedido, o mesmo deve aparecer para a pessoa vendedora 
 npm install
 ```
 
-2. Acesse a pasta do back-end e rode o docker.
-
-```bash
-docker-compose up -d
-```
-
-3. Rode o back-end.
+2. Rode o comando a baixo que irá rodar tanto o front como o back.
 
 ```bash
 npm start
 ```
 
-4. Acesse agora a pasta do front-end.
-
-```bash
-npm start
-```
 
 ## Perfis já cadastrados
 
