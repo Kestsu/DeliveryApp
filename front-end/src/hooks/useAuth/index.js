@@ -114,10 +114,13 @@ const useAuth = () => {
   };
 
   const handleRegister = async ({ userData }) => {
+    console.log(userData);
     try {
       const { data } = await api.post('/register', userData);
       setLoading(true);
+      console.log(!data.message);
       if (!data.message) {
+        console.log('AQUIII');
         localStorage.setItem('user', JSON.stringify(data));
 
         api.defaults.headers.Authorization = `${data.token}`;
@@ -128,7 +131,7 @@ const useAuth = () => {
       setLoading(false);
       return 'Ja existe';
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setLoading(false);
     }
   };
