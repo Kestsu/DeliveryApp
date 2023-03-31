@@ -24,17 +24,28 @@ Se a pessoa cliente faz o pedido, o mesmo deve aparecer para a pessoa vendedora 
 
 ## Execução da aplicação localmente
 
+1. Faça o git clone na pasta local.
 
-1. Instale as dependências.
+```bash
+git clone git@github.com:Kestsu/DeliveryApp.git
+```
+
+2. Instale as dependências.
 
 ```bash
 npm install
 ```
 
-2. Rode o comando a baixo que irá rodar tanto o front como o back.
+3. Rode o docker na maquina com o comando abaixo.
 
 ```bash
-npm start
+cd back-end && docker-compose up -d
+```
+
+4. Rode o comando abaixo que irá rodar tanto o front como o back.
+
+```bash
+cd .. && npm start
 ```
 
 
