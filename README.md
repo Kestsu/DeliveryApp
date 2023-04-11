@@ -1,6 +1,9 @@
 # App Delivery: Uma plataforma de delivery de cerveja. 🍻! (Back-end & Front-end)
 
+<img src="https://user-images.githubusercontent.com/99990041/231243106-c3c0874b-670f-4b9d-a57a-8b96ac7a9821.png" width="400px">
+
 Esse projeto tem a interação entre o back-end e o front-end.
+
 
 Esse site tem como objtivo ajuda a dona Tereza, a expandir seu negocio via delivery. E essa aplicação ajudou a agilizar a vida de sua equipe e das pessoas que compram seus produtos.
 
